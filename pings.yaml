@@ -1,0 +1,2 @@
+# Required to indicate this is a `pings.yaml` file
+$schema: moz://mozilla.org/schemas/glean/pings/2-0-0
