@@ -28,9 +28,9 @@
     "generate-pwa-icons": "tsx scripts/generate-pwa-icons.ts",
     "postinstall": "ignore-dependency-scripts \"stale-dep -u && simple-git-hooks && nuxi prepare && nr prepare-translation-status\"",
     "release": "stale-dep && bumpp && tsx scripts/release.ts",
-    "build:glean": "glean translate metrics.yaml pings.yaml -f typescript -o glean",
-    "docs:glean": "glean translate path/to/metrics.yaml pings.yaml -f markdown -o docs/glean",
-    "lint:glean": "glean glinter metrics.yaml pings.yaml"
+    "build:glean": "glean translate telemetry/metrics.yaml telemetry/pings.yaml -f typescript -o telemetry/generated",
+    "docs:glean": "glean translate telemetry/metrics.yaml pings.yaml -f markdown -o telemetry/generated/docs",
+    "lint:glean": "glean glinter telemetry/metrics.yaml telemetry/pings.yaml"
   },
   "dependencies": {
     "@emoji-mart/data": "^1.1.2",

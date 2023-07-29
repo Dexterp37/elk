@@ -1,15 +1,10 @@
 <script setup lang="ts">
 
-const { t } = useI18n()
 
-import { view } from '../../../glean/timeline';
+const { t } = useI18n()
 
 useHydratedHead({
   title: () => t('title.federated_timeline'),
-})
-
-onMounted(() => {
-  view.record();
 })
 </script>
 
