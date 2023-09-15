@@ -20,6 +20,8 @@ const props = withDefaults(
     // When looking into a detailed view of a post, we can simplify the replying badges
     // to the main expanded post
     main?: mastodon.v1.Status
+
+    deleteItem: Function
   }>(),
   { actions: true },
 )
@@ -171,7 +173,7 @@ const forceShow = ref(false)
                 </div>
               </div>
             </div>
-            <StatusActionsMore v-if="actions !== false" :status="status" me--2 />
+            <StatusActionsMore v-if="actions !== false" :status="status" :delete-item="props.deleteItem" me--2 />
           </div>
 
           <!-- Content -->

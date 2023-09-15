@@ -40,10 +40,10 @@ const showOriginSite = $computed(() =>
         {{ $t('timeline.show_new_items', number, { named: { v: formatNumber(number) } }) }}
       </button>
     </template>
-    <template #default="{ item, older, newer, active }">
+    <template #default="{ item, older, newer, active, deleteItem }">
       <template v-if="virtualScroller">
         <DynamicScrollerItem :item="item" :active="active" tag="article">
-          <StatusCard :status="item" :context="context" :older="older" :newer="newer" />
+          <StatusCard :status="item" :context="context" :older="older" :newer="newer" :delete-item="deleteItem" />
         </DynamicScrollerItem>
       </template>
       <template v-else>

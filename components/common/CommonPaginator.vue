@@ -31,6 +31,7 @@ defineSlots<{
     active?: boolean
     older: U
     newer: U // newer is undefined when index === 0
+    deleteItem: Function
   }) => void
   items: (props: {
     items: UnwrapRef<U[]>
@@ -46,7 +47,7 @@ defineSlots<{
 const { t } = useI18n()
 const nuxtApp = useNuxtApp()
 
-const { addStatus, items, prevItems, update, state, endAnchor, error } = usePaginator(paginator, $$(stream), eventType, preprocess)
+const { addStatus, deleteItem, items, prevItems, update, state, endAnchor, error } = usePaginator(paginator, $$(stream), eventType, preprocess)
 
 function percolateStatus(status) {
   addStatus(status)
@@ -95,6 +96,7 @@ defineExpose({ createEntry, removeEntry, updateEntry, percolateStatus })
             :newer="items[index - 1] as U"
             :index="index"
             :items="items as U[]"
+            :delete-item="deleteItem"
           />
         </DynamicScroller>
       </template>
@@ -107,6 +109,7 @@ defineExpose({ createEntry, removeEntry, updateEntry, percolateStatus })
           :newer="items[index - 1] as U"
           :index="index"
           :items="items as U[]"
+          :delete-item="deleteItem"
         />
       </template>
     </slot>

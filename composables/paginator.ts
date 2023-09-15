@@ -35,6 +35,13 @@ export function usePaginator<T, P, U = T>(
     data.splice(0, 0, status)
   }
 
+  function deleteItem(id: string) {
+    const data = items.value as mastodon.v1.Status[]
+    const index = data.findIndex(s => s.id === id)
+    if (index >= 0)
+      data.splice(index, 1)
+  }
+
   watch(stream, (stream) => {
     stream?.then((s) => {
       s.on(eventType, (status) => {
@@ -61,10 +68,11 @@ export function usePaginator<T, P, U = T>(
       s.on('delete', (id) => {
         removeCachedStatus(id)
 
-        const data = items.value as mastodon.v1.Status[]
-        const index = data.findIndex(s => s.id === id)
-        if (index >= 0)
-          data.splice(index, 1)
+        deleteItem(id)
+        // const data = items.value as mastodon.v1.Status[]
+        // const index = data.findIndex(s => s.id === id)
+        // if (index >= 0)
+        //   data.splice(index, 1)
       })
     })
   }, { immediate: true })
@@ -134,6 +142,7 @@ export function usePaginator<T, P, U = T>(
     items,
     prevItems,
     update,
+    deleteItem,
     state,
     error,
     endAnchor,

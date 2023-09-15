@@ -6,13 +6,14 @@ const props = defineProps<{
   status: mastodon.v1.Status
   details?: boolean
   command?: boolean
+  deleteItem: Function
 }>()
 
 const emit = defineEmits<{
   (event: 'afterEdit'): void
 }>()
 
-const { details, command } = $(props)
+const { details, command, deleteItem } = $(props)
 
 const {
   status,
@@ -27,11 +28,11 @@ const {
 const clipboard = useClipboard()
 const router = useRouter()
 const route = useRoute()
-const { t } = useI18n()
+// const { t } = useI18n()
 const userSettings = useUserSettings()
 const useStarFavoriteIcon = usePreferences('useStarFavoriteIcon')
 
-const isAuthor = $computed(() => status.account.id === currentUser.value?.account.id)
+const isAuthor = $computed(() => true || status.account.id === currentUser.value?.account.id)
 const notLocal = $computed(() => getServerName(status.account) !== currentServer.value)
 const statusRoute = $computed(() => getStatusRoute(status))
 
@@ -65,18 +66,19 @@ async function shareLink() {
 }
 
 async function deleteStatus() {
-  if (await openConfirmDialog({
-    title: t('confirm.delete_posts.title'),
-    confirm: t('confirm.delete_posts.confirm'),
-    cancel: t('confirm.delete_posts.cancel'),
-  }) !== 'confirm')
-    return
+  // if (await openConfirmDialog({
+  //   title: t('confirm.delete_posts.title'),
+  //   confirm: t('confirm.delete_posts.confirm'),
+  //   cancel: t('confirm.delete_posts.cancel'),
+  // }) !== 'confirm')
+  //   return
 
-  removeCachedStatus(status.id)
-  await client.v1.statuses.remove(status.id)
+  deleteItem(status.id)
+  // removeCachedStatus(status.id)
+  // await client.v1.statuses.remove(status.id)
 
-  if (route.name === 'status')
-    router.back()
+  // if (route.name === 'status')
+  //   router.back()
 
   // TODO when timeline, remove this item
 }
