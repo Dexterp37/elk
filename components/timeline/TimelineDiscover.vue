@@ -30,21 +30,23 @@ function updateUTM(url: string): string {
         :to="updateUTM(item.url)"
         target="_blank"
         external
-        style="padding: 16px 8px"
-        border="b base" flex
+        p-y-16px
+        p-x-8px
+        flex
+        border="b base"
       >
         <div class="content" w-full pr>
           <h4 text-sm text-secondary>
             {{ item.publisher }}
           </h4>
-          <h3 text-lg line-height-tight font-500 style="margin: 4px 0 4px">
+          <h3 text-lg line-height-tight font-500 m-y-4px>
             {{ shorten(item.title, 100) }}
           </h3>
           <p>
             {{ shorten(item.excerpt, 140) }}
           </p>
         </div>
-        <div class="media" relative overflow-hidden style="min-width: 120px; max-width: 120px;">
+        <div class="media" relative overflow-hidden max-w-120px min-w-120px>
           <img :src="item.imageUrl" rounded-lg overflow-hidden w-full ha>
         </div>
       </NuxtLink>
