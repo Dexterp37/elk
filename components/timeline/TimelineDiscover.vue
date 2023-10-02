@@ -5,7 +5,7 @@ import { getLanguageForRecs } from '../../utils/language'
 const { locale: lang } = useI18n()
 const locale = getLanguageForRecs(lang.value)
 
-const recommendations: Recommendation[] = await $fetch(`/api/:server/recommendations?locale=${locale}`)
+const recommendations: Recommendation[] = await $fetch(`/api/${publicServer.value}/recommendations?locale=${locale}`)
 
 // Shorten a string to less than maxLen characters without truncating words.
 function shorten(str: string, maxLen: number): string {
