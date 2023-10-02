@@ -25,8 +25,8 @@ const handlers = [
     handler: defineLazyEventHandler(() => import('~/server/api/list-servers').then(r => r.default || r)),
   },
   {
-    route: '/api/recommendations',
-    handler: defineLazyEventHandler(() => import('~/server/api/recommendations').then(r => r.default || r)),
+    route: '/api/:server/recommendations',
+    handler: defineLazyEventHandler(() => import('server/api/[server]/recommendations').then(r => r.default || r)),
   },
 ]
 
