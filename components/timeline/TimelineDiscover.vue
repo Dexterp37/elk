@@ -18,6 +18,13 @@ function shorten(str: string, maxLen: number): string {
 function updateUTM(url: string): string {
   return url.replace('pocket-newtab', 'mozilla')
 }
+
+const clipboard = useClipboard()
+async function copyLink(url, event) {
+  event.preventDefault()
+  if (url)
+    await clipboard.copy(url)
+}
 </script>
 
 <template>
@@ -48,6 +55,11 @@ function updateUTM(url: string): string {
         </div>
         <div class="media" relative overflow-hidden max-w-120px min-w-120px>
           <img :src="item.imageUrl" rounded-lg overflow-hidden w-full ha>
+          <div m-y-4px flex flex-justify-end>
+            <button p-12px text-xl @click="copyLink(updateUTM(item.url), $event)">
+              <div i-ri:share-line />
+            </button>
+          </div>
         </div>
       </NuxtLink>
     </template>
