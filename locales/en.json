@@ -549,8 +549,8 @@
         "label": "Featured hashtags"
       },
       "fxa_settings": {
-        "description": "Change your password and Firefox account preferences",
-        "label": "Firefox account settings"
+        "description": "Change your password and account preferences",
+        "label": "Account settings"
       },
       "label": "Profile",
       "moso_settings": {
