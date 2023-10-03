@@ -55,7 +55,7 @@ async function copyLink(url, event) {
         </div>
         <div class="media" relative overflow-hidden max-w-120px min-w-120px>
           <img :src="item.imageUrl" rounded-lg overflow-hidden w-full ha>
-          <div my-y-4px flex flex-justify-end>
+          <div m-y-4px flex flex-justify-end>
             <button p-12px text-xl @click="copyLink(updateUTM(item.url), $event)">
               <div i-ri:share-line />
             </button>
