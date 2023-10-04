@@ -3,7 +3,7 @@ export default defineEventHandler(async (event) => {
     const { locale } = getQuery(event)
 
     const recommendations = await fetch(
-      `https://firefox-api-proxy.readitlater.com/desktop/v1/recommendations?consumer_key=moso-web-dev&locale=${locale}`,
+      `https://mozilla.social/content-feed/moso/v1/discover?locale=${locale}`,
     )
       .then(response => response.json())
       .then(response => response.data)

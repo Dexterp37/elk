@@ -5,7 +5,7 @@ import { getLanguageForRecs } from '../../utils/language'
 const { locale: lang } = useI18n()
 const locale = getLanguageForRecs(lang.value)
 
-const recommendations: Recommendation[] = await $fetch(`/api/:server/recommendations?locale=${locale}`)
+const recommendations: Recommendation[] = await $fetch(`/api/${publicServer.value}/recommendations?locale=${locale}`)
 
 // Shorten a string to less than maxLen characters without truncating words.
 function shorten(str: string, maxLen: number): string {
@@ -17,6 +17,13 @@ function shorten(str: string, maxLen: number): string {
 // This is temporary untill we are able to fetch from the new endpoint
 function updateUTM(url: string): string {
   return url.replace('pocket-newtab', 'mozilla')
+}
+
+const clipboard = useClipboard()
+async function copyLink(url, event) {
+  event.preventDefault()
+  if (url)
+    await clipboard.copy(url)
 }
 </script>
 
@@ -48,6 +55,11 @@ function updateUTM(url: string): string {
         </div>
         <div class="media" relative overflow-hidden max-w-120px min-w-120px>
           <img :src="item.imageUrl" rounded-lg overflow-hidden w-full ha>
+          <div m-y-4px flex flex-justify-end>
+            <button p-12px text-xl @click="copyLink(updateUTM(item.url), $event)">
+              <div i-ri:share-line />
+            </button>
+          </div>
         </div>
       </NuxtLink>
     </template>
