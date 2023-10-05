@@ -47,7 +47,7 @@ const showOriginSite = $computed(() =>
         </DynamicScrollerItem>
       </template>
       <template v-else>
-        <StatusCard :status="item" :context="context" :older="older" :newer="newer" />
+        <StatusCard :status="item" :context="context" :older="older" :newer="newer" :delete-item="deleteItem" />
       </template>
     </template>
     <template v-if="context === 'account' " #done="{ items }">
