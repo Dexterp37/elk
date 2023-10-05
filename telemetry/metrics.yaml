@@ -1,40 +1,57 @@
 $schema: moz://mozilla.org/schemas/glean/metrics/2-0-0
 
-moso_events: # If we're using a single metrics.yaml across Mozilla Social, what do I call the category? Can I omit a category?
-
-  # First we have some event properties that are re-used across all events
-  # I implemented these as uuid/string/quantity metrics, instead of nesting them as extra_keys inside events. Is this valid?
-
-  # Is it possible to attach them to the baseline ping, as I've done?
-
-  mastodon_account_id:
-    type: string
-    lifetime: application
+identifiers:
+  oauth_client_id:
+    type: uuid
+    lifetime: user
     description: >
-      The user's account ID from Mastodon.
+      The client_id from oauth.
     bugs:
       - TBD
     data_reviews:
       - TBD
-    data_sensitivity:
-      - technical
     notification_emails:
       - kdemtchouk@mozilla.com
     expires: never
     send_in_pings:
       - events
 
-  mastodon_handle:
+  fxa_account_id:
     type: string
-    lifetime: application
+    description: >
+      The user's FxA account ID, if available.
+    bugs:
+      - TBD
+    data_reviews:
+      - TBD
+    notification_emails:
+      - kdemtchouk@mozilla.com
+    expires: never
+    send_in_pings:
+      - events
+
+  mastodon_account_id:
+    type: string
+    description: >
+      The user's numeric account ID from Mastodon.
+    bugs:
+      - TBD
+    data_reviews:
+      - TBD
+    notification_emails:
+      - kdemtchouk@mozilla.com
+    expires: never
+    send_in_pings:
+      - events
+
+  mastodon_account_handle:
+    type: string
     description: >
       The user's account handle.
     bugs:
       - TBD
     data_reviews:
       - TBD
-    data_sensitivity:
-      - technical
     notification_emails:
       - kdemtchouk@mozilla.com
     expires: never
@@ -43,7 +60,6 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
 
   mastodon_instance_domain:
     type: string
-    lifetime: application
     description: >
       The domain of the Mastodon instance where
       the user's Mastodon account is hosted (e.g. `mozilla.social`).
@@ -51,48 +67,27 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
       - TBD
     data_reviews:
       - TBD
-    data_sensitivity:
-      - technical
     notification_emails:
       - kdemtchouk@mozilla.com
     expires: never
     send_in_pings:
       - events
 
-  page_url:
+  adjust_device_id:
     type: string
-    lifetime: application
     description: >
-      The page the user visited
+      The Adjust device ID for this user, if available.
     bugs:
       - TBD
     data_reviews:
       - TBD
-    data_sensitivity:
-      - technical
     notification_emails:
       - kdemtchouk@mozilla.com
     expires: never
     send_in_pings:
       - events
 
-  referrer_url:
-    type: string
-    lifetime: application
-    description: >
-      The page the user came from
-    bugs:
-      - TBD
-    data_reviews:
-      - TBD
-    data_sensitivity:
-      - technical
-    notification_emails:
-      - kdemtchouk@mozilla.com
-    expires: never
-    send_in_pings:
-      - events
-
+ui:
   impression:
     type: event
     description: >
@@ -104,8 +99,6 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
       - TBD
     data_reviews:
       - TBD
-    data_sensitivity:
-      - interaction
     notification_emails:
       - kdemtchouk@mozilla.com
     expires: never
@@ -116,7 +109,8 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
           with by the user (e.g. `home.rec` or `home.boost`).
           The identifier is a period-delimited string, ordered in
           increasing order of specificity (e.g. `[SCREEN].[BUTTON]`).
-          #Call out tracking spreadsheet for all possible values of ui_identifier here?
+          All existing identifier values are being tracked here:
+          https://docs.google.com/spreadsheets/d/1KX6TiyXXg2fE0a1IDKsy5O97ZrHYvjKohmIX_m8ECXY/edit?usp=sharing
         type: string
       ui_additional_detail: &ui_additional_detail
         description: >
@@ -128,14 +122,12 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
           The Mastodon status ID of the post that was seen/interacted
           with by the user, if any.
           The Mastodon API calls statuses "posts", but they are one and the same.
-        type: quantity
+        type: string
       corpus_recommendation_id: &corpus_recommendation_id
         description: >
           TBD machine learning/recommendation identifier of the content
           that was seen/interacted with by the user, if any.
         type: string
-    send_in_pings:
-      - events
 
   engagement:
     type: event
@@ -146,8 +138,6 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
       - TBD
     data_reviews:
       - TBD
-    data_sensitivity:
-      - interaction
     notification_emails:
       - kdemtchouk@mozilla.com
     expires: never
@@ -173,6 +163,39 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
           If the UI element is a toggle or setting, the value of the
           toggle/setting after user interaction has taken place.
         type: string
+
+web:
+  page_url:
+    type: string
+    description: >
+      The full URL of the page that was visited,
+      along with URL query parameters.
+      For example, `https://mozilla.social/home?utm_source=test`.
+    bugs:
+      - TBD
+    data_reviews:
+      - TBD
+    notification_emails:
+      - kdemtchouk@mozilla.com
+    expires: never
+    send_in_pings:
+      - events
+
+  referrer_url:
+    type: string
+    description: >
+      The full URL of the previous web page from which a link was followed
+      in order to trigger the page view.
+      Comes from the `referer` field of the HTTP header.
+      May not always be available.
+      For example, `https://www.google.com`.
+    bugs:
+      - TBD
+    data_reviews:
+      - TBD
+    notification_emails:
+      - kdemtchouk@mozilla.com
+    expires: never
     send_in_pings:
       - events
 
@@ -184,31 +207,9 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
       - TBD
     data_reviews:
       - TBD
-    data_sensitivity:
-      - interaction
     notification_emails:
       - kdemtchouk@mozilla.com
     expires: never
-    extra_keys:
-      page_url: &page_url
-        description: >
-          The full URL of the page that was visited,
-          along with URL query parameters.
-          For example, `https://mozilla.social/home?utm_source=test`.
-        type: string
-      referrer_url: &referrer_url
-        description: >
-          The full URL of the previous web page from which a link was followed
-          in order to trigger the page view.
-          Comes from the `referer` field of the HTTP header.
-          May not always be available.
-          For example, `https://www.google.com`.
-        type: string
-    send_in_pings:
-      - events
-
-  # Ideally, we would have a page_ping event too, but without a page view ID, I am not sure it would be useful for data modeling
-  # A page_ping would let us track time on page, as well as scroll progress
 
   link_click:
     type: event
@@ -218,8 +219,6 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
       - TBD
     data_reviews:
       - TBD
-    data_sensitivity:
-      - interaction
     notification_emails:
       - kdemtchouk@mozilla.com
     expires: never
@@ -232,9 +231,8 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
         description: >
           The HTML element ID of the link that the user clicked.
         type: string
-    send_in_pings:
-      - events
 
+backend:
   object_update:
     type: event
     description: >
@@ -248,8 +246,6 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
       - TBD
     data_reviews:
       - TBD
-    data_sensitivity:
-      - interaction
     notification_emails:
       - kdemtchouk@mozilla.com
     expires: never
@@ -262,6 +258,4 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
       object_state:
         description: >
           A JSON representation of the latest state of the object.
-        type: string # Is there a JSON type?
-    send_in_pings:
-      - events
+        type: string
