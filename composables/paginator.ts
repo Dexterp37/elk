@@ -69,10 +69,10 @@ export function usePaginator<T, P, U = T>(
         removeCachedStatus(id)
 
         deleteItem(id)
-        // const data = items.value as mastodon.v1.Status[]
-        // const index = data.findIndex(s => s.id === id)
-        // if (index >= 0)
-        //   data.splice(index, 1)
+        const data = items.value as mastodon.v1.Status[]
+        const index = data.findIndex(s => s.id === id)
+        if (index >= 0)
+          data.splice(index, 1)
       })
     })
   }, { immediate: true })
