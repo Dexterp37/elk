@@ -23,7 +23,6 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
     expires: never
     send_in_pings:
       - events
-      - glean_internal_info
 
   mastodon_handle:
     type: string
@@ -41,7 +40,6 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
     expires: never
     send_in_pings:
       - events
-      - glean_internal_info
 
   mastodon_instance_domain:
     type: string
@@ -60,7 +58,6 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
     expires: never
     send_in_pings:
       - events
-      - glean_internal_info
 
   page_url:
     type: string
