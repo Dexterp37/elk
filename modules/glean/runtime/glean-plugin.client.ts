@@ -1,7 +1,7 @@
 import Glean from '@mozilla/glean/web'
 import * as log from 'tauri-plugin-log-api'
 
-import { load } from '../../../telemetry/generated/page'
+import { pageView } from '../../../telemetry/generated/mosoEvents'
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('app:mounted', () => {
@@ -11,7 +11,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     const devMode = useAppConfig().env === ('dev' || 'canary' || 'preview')
     const uploadEnabled = devMode // this will eventually be a setting that the user can toggle
 
-    Glean.initialize(GLEAN_APP_ID, uploadEnabled, { })
+    Glean.initialize(GLEAN_APP_ID, uploadEnabled, {})
 
     // Debugging
     if (devMode) {
@@ -21,8 +21,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   })
 
   nuxtApp.hook('page:finish', () => {
-    const route = useRoute()
-
-    load.record({ path: route.path })
+    pageView.record({ page_url: window.location.href, ...(document.referrer !== '' && { referrer_url: document.referrer }) })
   })
 })
