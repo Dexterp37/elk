@@ -62,6 +62,40 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
       - events
       - glean_internal_info
 
+  page_url:
+    type: string
+    lifetime: application
+    description: >
+      The page the user visited
+    bugs:
+      - TBD
+    data_reviews:
+      - TBD
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - kdemtchouk@mozilla.com
+    expires: never
+    send_in_pings:
+      - events
+
+  referrer_url:
+    type: string
+    lifetime: application
+    description: >
+      The page the user came from
+    bugs:
+      - TBD
+    data_reviews:
+      - TBD
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - kdemtchouk@mozilla.com
+    expires: never
+    send_in_pings:
+      - events
+
   impression:
     type: event
     description: >
@@ -193,8 +227,6 @@ moso_events: # If we're using a single metrics.yaml across Mozilla Social, what 
       - kdemtchouk@mozilla.com
     expires: never
     extra_keys:
-      page_url: *page_url
-      referrer_url: *referrer_url
       target_url:
         description: >
           The destination URL of the link that the user clicked.

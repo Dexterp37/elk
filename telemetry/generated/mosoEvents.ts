@@ -8,8 +8,8 @@ import StringMetricType from "@mozilla/glean/private/metrics/string";
 import EventMetricType from "@mozilla/glean/private/metrics/event";
 
 /**
- * Event triggered when a user taps/clicks on a UI element,  triggering a change
- * in app state.
+ * Event triggered when a user taps/clicks on a UI element, triggering a change in
+ * app state.
  *
  * Generated from `moso_events.engagement`.
  */
@@ -30,7 +30,7 @@ export const engagement = new EventMetricType<{
 
 /**
  * Event triggered when a user views a notable UI element. Triggered once per page
- * load, as soon as any pixel of that UI  element is visible in the foreground for
+ * load, as soon as any pixel of that UI element is visible in the foreground for
  * any length of time. UI elements may include: content, pages, CTAs, etc.
  *
  * Generated from `moso_events.impression`.
@@ -55,8 +55,6 @@ export const impression = new EventMetricType<{
  */
 export const linkClick = new EventMetricType<{
     element_id?: string,
-    page_url?: string,
-    referrer_url?: string,
     target_url?: string,
 }>({
     category: "moso_events",
@@ -64,7 +62,7 @@ export const linkClick = new EventMetricType<{
     sendInPings: ["events"],
     lifetime: "ping",
     disabled: false,
-}, ["element_id", "page_url", "referrer_url", "target_url"]);
+}, ["element_id", "target_url"]);
 
 /**
  * The user's account ID from Mastodon.
@@ -126,6 +124,19 @@ export const objectUpdate = new EventMetricType<{
 }, ["object_state", "object_type"]);
 
 /**
+ * The page the user visited
+ *
+ * Generated from `moso_events.page_url`.
+ */
+export const pageUrl = new StringMetricType({
+    category: "moso_events",
+    name: "page_url",
+    sendInPings: ["events"],
+    lifetime: "application",
+    disabled: false,
+});
+
+/**
  * Event triggered when a user requests to load a web page.
  *
  * Generated from `moso_events.page_view`.
@@ -140,5 +151,18 @@ export const pageView = new EventMetricType<{
     lifetime: "ping",
     disabled: false,
 }, ["page_url", "referrer_url"]);
+
+/**
+ * The page the user came from
+ *
+ * Generated from `moso_events.referrer_url`.
+ */
+export const referrerUrl = new StringMetricType({
+    category: "moso_events",
+    name: "referrer_url",
+    sendInPings: ["events"],
+    lifetime: "application",
+    disabled: false,
+});
 
 

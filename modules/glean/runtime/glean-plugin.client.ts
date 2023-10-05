@@ -1,7 +1,7 @@
 import Glean from '@mozilla/glean/web'
 import * as log from 'tauri-plugin-log-api'
 
-import { pageView } from '../../../telemetry/generated/mosoEvents'
+import { linkClick, pageUrl, pageView, referrerUrl } from '../../../telemetry/generated/mosoEvents'
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('app:mounted', () => {
@@ -18,9 +18,41 @@ export default defineNuxtPlugin((nuxtApp) => {
       Glean.setLogPings(true) // logs to the console
       Glean.setDebugViewTag('moso-elk-dev') // logs to https://debug-ping-preview.firebaseapp.com
     }
+
+    const eventListener = (event) => {
+      if (event.type === 'click') {
+        handleButtonClick(event)
+        handleLinkClick(event)
+      }
+    }
+
+    function handleButtonClick(ev: MouseEvent) {
+      const eventTarget = ev?.target as Element
+      const closestButton = eventTarget.closest('button')
+      // does the button have an href? if so, fire linkClick
+      // else fire engagement event?
+      if (closestButton)
+        linkClick.record()
+    }
+
+    function handleLinkClick(ev: MouseEvent) {
+      const eventTarget = ev?.target as Element
+      const closestLink = eventTarget.closest('a')
+      if (closestLink)
+        linkClick.record({ target_url: closestLink.getAttribute('href') || '' })
+    }
+
+    window.addEventListener('click', eventListener)
   })
 
   nuxtApp.hook('page:finish', () => {
+    pageUrl.set(window.location.href)
+
+    if (document.referrer !== '')
+      referrerUrl.set(window.location.href)
+    else
+      referrerUrl.set('')
+
     pageView.record({ page_url: window.location.href, ...(document.referrer !== '' && { referrer_url: document.referrer }) })
   })
 })
