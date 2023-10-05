@@ -173,7 +173,7 @@ const forceShow = ref(false)
                 </div>
               </div>
             </div>
-            <StatusActionsMore v-if="actions !== false" :status="status" :delete-item="props.deleteItem" me--2 />
+            <StatusActionsMore v-if="actions !== false" :status="status" me--2 @after-delete="props.deleteItem" />
           </div>
 
           <!-- Content -->

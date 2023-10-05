@@ -6,14 +6,14 @@ const props = defineProps<{
   status: mastodon.v1.Status
   details?: boolean
   command?: boolean
-  deleteItem: Function
 }>()
 
 const emit = defineEmits<{
   (event: 'afterEdit'): void
+  (event: 'afterDelete'): void
 }>()
 
-const { details, command, deleteItem } = $(props)
+const { details, command } = $(props)
 
 const {
   status,
@@ -73,7 +73,7 @@ async function deleteStatus() {
   // }) !== 'confirm')
   //   return
 
-  deleteItem(status.id)
+  emit('afterDelete', status.id)
   // removeCachedStatus(status.id)
   // await client.v1.statuses.remove(status.id)
 
