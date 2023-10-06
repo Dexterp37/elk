@@ -1,21 +1,6 @@
 $schema: moz://mozilla.org/schemas/glean/metrics/2-0-0
 
 identifiers:
-  oauth_client_id:
-    type: uuid
-    lifetime: user
-    description: >
-      The client_id from oauth.
-    bugs:
-      - TBD
-    data_reviews:
-      - TBD
-    notification_emails:
-      - kdemtchouk@mozilla.com
-    expires: never
-    send_in_pings:
-      - events
-
   fxa_account_id:
     type: string
     description: >
@@ -29,9 +14,12 @@ identifiers:
     expires: never
     send_in_pings:
       - events
+    no_lint:
+      - baseline
 
   mastodon_account_id:
     type: string
+    lifetime: application
     description: >
       The user's numeric account ID from Mastodon.
     bugs:
@@ -43,9 +31,12 @@ identifiers:
     expires: never
     send_in_pings:
       - events
+    no_lint:
+      - baseline
 
   mastodon_account_handle:
     type: string
+    lifetime: application
     description: >
       The user's account handle.
     bugs:
@@ -57,9 +48,12 @@ identifiers:
     expires: never
     send_in_pings:
       - events
+    no_lint:
+      - baseline
 
   mastodon_instance_domain:
     type: string
+    lifetime: application
     description: >
       The domain of the Mastodon instance where
       the user's Mastodon account is hosted (e.g. `mozilla.social`).
@@ -72,6 +66,8 @@ identifiers:
     expires: never
     send_in_pings:
       - events
+    no_lint:
+      - baseline
 
   adjust_device_id:
     type: string
@@ -86,6 +82,24 @@ identifiers:
     expires: never
     send_in_pings:
       - events
+    no_lint:
+      - baseline
+
+  user_agent:
+    type: string
+    description: >
+      The device user agent string.
+    bugs:
+      - TBD
+    data_reviews:
+      - TBD
+    notification_emails:
+      - kdemtchouk@mozilla.com
+    expires: never
+    send_in_pings:
+      - events
+    no_lint:
+      - baseline
 
 ui:
   impression:
@@ -167,6 +181,7 @@ ui:
 web:
   page_url:
     type: string
+    lifetime: application
     description: >
       The full URL of the page that was visited,
       along with URL query parameters.
@@ -183,6 +198,7 @@ web:
 
   referrer_url:
     type: string
+    lifetime: application
     description: >
       The full URL of the previous web page from which a link was followed
       in order to trigger the page view.
