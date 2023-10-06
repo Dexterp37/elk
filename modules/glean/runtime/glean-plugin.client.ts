@@ -2,6 +2,7 @@ import Glean from '@mozilla/glean/web'
 import * as log from 'tauri-plugin-log-api'
 
 import { linkClick, pageUrl, pageView, referrerUrl } from '../../../telemetry/generated/web'
+import { userAgent } from '../../../telemetry/generated/identifiers'
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('app:mounted', () => {
@@ -12,6 +13,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     const uploadEnabled = devMode // this will eventually be a setting that the user can toggle
 
     Glean.initialize(GLEAN_APP_ID, uploadEnabled, {})
+    userAgent.set(navigator.userAgent)
 
     // Debugging
     if (devMode) {

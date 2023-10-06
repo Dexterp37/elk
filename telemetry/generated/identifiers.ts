@@ -81,7 +81,7 @@ export const userAgent = new StringMetricType({
     category: "identifiers",
     name: "user_agent",
     sendInPings: ["events"],
-    lifetime: "ping",
+    lifetime: "application",
     disabled: false,
 });
 

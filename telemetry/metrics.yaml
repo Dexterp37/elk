@@ -87,6 +87,7 @@ identifiers:
 
   user_agent:
     type: string
+    lifetime: application
     description: >
       The device user agent string.
     bugs:

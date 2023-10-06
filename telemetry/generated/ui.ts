@@ -7,8 +7,8 @@
 import EventMetricType from "@mozilla/glean/private/metrics/event";
 
 /**
- * Event triggered when a user taps/clicks on a UI element,  triggering a change
- * in app state.
+ * Event triggered when a user taps/clicks on a UI element, triggering a change in
+ * app state.
  *
  * Generated from `ui.engagement`.
  */
@@ -29,7 +29,7 @@ export const engagement = new EventMetricType<{
 
 /**
  * Event triggered when a user views a notable UI element. Triggered once per page
- * load, as soon as any pixel of that UI  element is visible in the foreground for
+ * load, as soon as any pixel of that UI element is visible in the foreground for
  * any length of time. UI elements may include: content, pages, CTAs, etc.
  *
  * Generated from `ui.impression`.
