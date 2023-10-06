@@ -3,6 +3,7 @@ import * as log from 'tauri-plugin-log-api'
 
 import { linkClick, pageUrl, pageView, referrerUrl } from '../../../telemetry/generated/web'
 import { userAgent } from '../../../telemetry/generated/identifiers'
+import { engagement } from '../../../telemetry/generated/ui'
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('app:mounted', () => {
@@ -21,7 +22,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       Glean.setDebugViewTag('moso-elk-dev') // logs to https://debug-ping-preview.firebaseapp.com
     }
 
-    const eventListener = (event) => {
+    const eventListener = (event: MouseEvent) => {
       if (event.type === 'click') {
         handleButtonClick(event)
         handleLinkClick(event)
@@ -31,10 +32,12 @@ export default defineNuxtPlugin((nuxtApp) => {
     function handleButtonClick(ev: MouseEvent) {
       const eventTarget = ev?.target as Element
       const closestButton = eventTarget.closest('button')
-      // does the button have an href? if so, fire linkClick
-      // else fire engagement event?
-      if (closestButton)
-        linkClick.record()
+
+      if (closestButton?.hasAttribute('href'))
+        linkClick.record({ target_url: closestButton.getAttribute('href') || '' })
+
+      if (eventTarget.hasAttribute('data-glean'))
+        engagement.record({ ui_identifier: eventTarget?.getAttribute('data-glean') || '' })
     }
 
     function handleLinkClick(ev: MouseEvent) {
