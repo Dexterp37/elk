@@ -22,7 +22,8 @@ function setFontSize(e: Event) {
         :min="0"
         :max="sizes.length - 1"
         :step="1"
-        :data-glean="`settings.interface.fontSize.${sizes.indexOf(userSettings.fontSize)}`"
+        data-glean="settings.interface.fontSize"
+        :data-glean-value="`${sizes.indexOf(userSettings.fontSize)}`"
         type="range"
         focus:outline-none
         appearance-none bg-transparent

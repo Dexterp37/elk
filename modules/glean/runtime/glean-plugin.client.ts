@@ -33,11 +33,27 @@ export default defineNuxtPlugin((nuxtApp) => {
       const eventTarget = ev?.target as Element
       const closestButton = eventTarget.closest('button')
 
+      interface EngagementDetails {
+        [propName: string]: {
+          engagement_type: string
+          ui_additional_detail: string
+        }
+      }
+
+      const engagementDetails: EngagementDetails = {
+        'settings.interface.colorMode': {
+          engagement_type: 'general',
+          ui_additional_detail: 'additional deets go here', // todo
+        },
+      }
+
       if (closestButton?.hasAttribute('href'))
         linkClick.record({ target_url: closestButton.getAttribute('href') || '' })
 
+      const data = eventTarget?.getAttribute('data-glean') || ''
+      const value = eventTarget?.getAttribute('data-glean-value') || ''
       if (eventTarget.hasAttribute('data-glean'))
-        engagement.record({ ui_identifier: eventTarget?.getAttribute('data-glean') || '' })
+        engagement.record({ ui_identifier: data, engagement_value: value, ...engagementDetails[data] })
     }
 
     function handleLinkClick(ev: MouseEvent) {
