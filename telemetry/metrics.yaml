@@ -231,31 +231,3 @@ web:
         description: >
           The HTML element ID of the link that the user clicked.
         type: string
-
-backend:
-  object_update:
-    type: event
-    description: >
-      Event triggered by the backend to record the change in state
-      of an object (e.g. API requests to the mozilla.social Mastodon
-      server).
-      In the future, we could potentially use this event to track
-      changes in state to core Mastodon objects (e.g. accounts and
-      posts).
-    bugs:
-      - TBD
-    data_reviews:
-      - TBD
-    notification_emails:
-      - kdemtchouk@mozilla.com
-    expires: never
-    extra_keys:
-      object_type:
-        description: >
-          A simple name to describe the object whose state changed.
-          For example, `api_request`.
-        type: string
-      object_state:
-        description: >
-          A JSON representation of the latest state of the object.
-        type: string
