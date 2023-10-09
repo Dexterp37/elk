@@ -14,11 +14,6 @@ function shorten(str: string, maxLen: number): string {
   return `${str.slice(0, str.lastIndexOf(' ', maxLen))}...`
 }
 
-// This is temporary untill we are able to fetch from the new endpoint
-function updateUTM(url: string): string {
-  return url.replace('pocket-newtab', 'mozilla')
-}
-
 const clipboard = useClipboard()
 async function copyLink(url, event) {
   event.preventDefault()
@@ -34,7 +29,7 @@ async function copyLink(url, event) {
   <main>
     <template v-for="item in recommendations" :key="item.tileId">
       <NuxtLink
-        :to="updateUTM(item.url)"
+        :to="item.url"
         target="_blank"
         external
         p-y-16px
@@ -54,9 +49,9 @@ async function copyLink(url, event) {
           </p>
         </div>
         <div class="media" relative overflow-hidden max-w-120px min-w-120px>
-          <img :src="item.imageUrl" rounded-lg overflow-hidden w-full ha>
+          <img :src="item.image.sizes?.[0]?.url" rounded-lg overflow-hidden w-full ha>
           <div m-y-4px flex flex-justify-end>
-            <button p-12px text-xl @click="copyLink(updateUTM(item.url), $event)">
+            <button p-12px text-xl @click="copyLink(item.url, $event)">
               <div i-ri:share-line />
             </button>
           </div>
