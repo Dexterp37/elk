@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { formatTimeAgo } from '@vueuse/core'
 
+const emit = defineEmits<{
+  (evt: 'published'): void
+}>()
 const route = useRoute()
 const { formatNumber } = useHumanReadableNumber()
 const timeAgoOptions = useTimeAgoOptions()
@@ -13,6 +16,10 @@ const nonEmptyDrafts = $computed(() => draftKeys
   .map(i => [i, currentUserDrafts.value[i]] as const),
 )
 
+async function onPublish() {
+  emit('published')
+}
+
 watchEffect(() => {
   draftKey = route.query.draft?.toString() || 'home'
 })
@@ -23,7 +30,7 @@ onDeactivated(() => {
 </script>
 
 <template>
-  <div flex="~ col" pt-6 h-screen>
+  <div flex="~ col" pt-6 mb-6>
     <div inline-flex justify-end h-8>
       <VDropdown v-if="nonEmptyDrafts.length" placement="bottom-end">
         <button btn-text flex="inline center">
@@ -57,7 +64,7 @@ onDeactivated(() => {
       </VDropdown>
     </div>
     <div>
-      <PublishWidget :key="draftKey" expanded class="min-h-100!" :draft-key="draftKey" />
+      <PublishWidget :key="draftKey" expanded class="min-h-100!" :draft-key="draftKey" @published="onPublish" />
     </div>
   </div>
 </template>

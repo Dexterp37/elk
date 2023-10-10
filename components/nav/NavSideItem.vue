@@ -5,8 +5,10 @@ const props = withDefaults(defineProps<{
   to: string | Record<string, string>
   userOnly?: boolean
   command?: boolean
+  lozenge?: boolean
 }>(), {
   userOnly: false,
+  lozenge: false,
 })
 
 defineSlots<{
@@ -56,12 +58,14 @@ const noUserVisual = computed(() => isHydrated.value && props.userOnly && !curre
     <CommonTooltip :disabled="!isMediumOrLargeScreen" :content="text" placement="right">
       <div
         class="item"
+        :class="lozenge ? 'lozenge' : ''"
         flex items-center gap4
         w-fit rounded-3
         px2 mx3 sm:mxa
         xl="ml0 mr5 px5 w-auto"
         transition-100
-        elk-group-hover="bg-active" group-focus-visible:ring="2 current"
+        :elk-group-hover="lozenge ? '' : 'bg-active'"
+        group-focus-visible:ring="2 current"
       >
         <slot name="icon">
           <div :class="icon" text-xl />
@@ -75,6 +79,36 @@ const noUserVisual = computed(() => isHydrated.value && props.userOnly && !curre
 </template>
 
 <style scoped>
+  .lozenge {
+    color: var(--c-text-base-light);
+    font-size: 15px;
+    line-height: 20px;
+    max-width: 160px;
+    border-radius: 360px;
+    align-items: center;
+    background: var(--c-primary);
+    display: flex;
+    justify-content: center;
+    padding-right: 50px;
+
+    &:hover {
+      background: var(--c-primary-active);
+    }
+  }
+
+  @media screen and ( min-width: 640px ) {
+    .lozenge.item {
+      padding: 0.2rem;
+    }
+  }
+
+  @media screen and ( min-width: 1280px ) {
+    .lozenge.item {
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+  }
+
   .item {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
