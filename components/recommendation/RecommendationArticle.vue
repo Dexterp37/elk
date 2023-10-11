@@ -17,13 +17,6 @@ function checkIntersection([{ isIntersecting }]: [{ isIntersecting: boolean }]):
   }
 }
 
-// Shorten a string to less than maxLen characters without truncating words.
-function shorten(str: string, maxLen: number): string {
-  if (str.length <= maxLen)
-    return str
-  return `${str.slice(0, str.lastIndexOf(' ', maxLen))}...`
-}
-
 const clipboard = useClipboard()
 async function copyLink(url: string, event: Event): void {
   event.preventDefault()
@@ -39,10 +32,10 @@ async function copyLink(url: string, event: Event): void {
         {{ item.publisher }}
       </h4>
       <h3 text-lg line-height-tight font-500 m-y-4px>
-        {{ shorten(item.title, 100) }}
+        {{ item.title }}
       </h3>
       <p>
-        {{ shorten(item.excerpt, 140) }}
+        {{ item.excerpt }}
       </p>
     </div>
     <div class="media" relative overflow-hidden max-w-120px min-w-120px>
@@ -59,5 +52,15 @@ async function copyLink(url: string, event: Event): void {
 <style scoped>
 a:hover h3 {
   text-decoration: underline;
+}
+p {
+  line-height: 1.6em;
+  max-height: 4.8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 </style>
