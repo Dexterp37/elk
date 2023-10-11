@@ -63,3 +63,8 @@ send_in_pings:
 no_lint:
   - baseline # baseline removed from `send_in_pings, added `no_lint`
 ```
+
+
+## The Spreadsheet™️
+
+The data team has requested that we keep [this spreadsheet](https://docs.google.com/spreadsheets/d/1KX6TiyXXg2fE0a1IDKsy5O97ZrHYvjKohmIX_m8ECXY/edit#gid=1532914466) up to date as we add engagement events. It's very similar to what we were doing in pocket - tracking the engagement event name and all its corresponding additional details.
