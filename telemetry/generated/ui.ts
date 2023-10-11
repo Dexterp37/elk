@@ -7,16 +7,18 @@
 import EventMetricType from "@mozilla/glean/private/metrics/event";
 
 /**
- * Event triggered when a user taps/clicks on a UI element, triggering a change in
- * app state.
+ * Event triggered when a user taps/clicks on a UI element,  triggering a change
+ * in app state.
  *
  * Generated from `ui.engagement`.
  */
 export const engagement = new EventMetricType<{
-    corpus_recommendation_id?: string,
     engagement_type?: string,
     engagement_value?: string,
+    mastodon_account_handle?: string,
+    mastodon_account_id?: string,
     mastodon_status_id?: string,
+    recommendation_id?: string,
     ui_additional_detail?: string,
     ui_identifier?: string,
 }>({
@@ -25,7 +27,7 @@ export const engagement = new EventMetricType<{
     sendInPings: ["events"],
     lifetime: "ping",
     disabled: false,
-}, ["corpus_recommendation_id", "engagement_type", "engagement_value", "mastodon_status_id", "ui_additional_detail", "ui_identifier"]);
+}, ["engagement_type", "engagement_value", "mastodon_account_handle", "mastodon_account_id", "mastodon_status_id", "recommendation_id", "ui_additional_detail", "ui_identifier"]);
 
 /**
  * Event triggered when a user views a notable UI element. Triggered once per page
@@ -35,8 +37,10 @@ export const engagement = new EventMetricType<{
  * Generated from `ui.impression`.
  */
 export const impression = new EventMetricType<{
-    corpus_recommendation_id?: string,
+    mastodon_account_handle?: string,
+    mastodon_account_id?: string,
     mastodon_status_id?: string,
+    recommendation_id?: string,
     ui_additional_detail?: string,
     ui_identifier?: string,
 }>({
@@ -45,6 +49,6 @@ export const impression = new EventMetricType<{
     sendInPings: ["events"],
     lifetime: "ping",
     disabled: false,
-}, ["corpus_recommendation_id", "mastodon_status_id", "ui_additional_detail", "ui_identifier"]);
+}, ["mastodon_account_handle", "mastodon_account_id", "mastodon_status_id", "recommendation_id", "ui_additional_detail", "ui_identifier"]);
 
 

@@ -7,33 +7,8 @@
 import StringMetricType from "@mozilla/glean/private/metrics/string";
 
 /**
- * The Adjust device ID for this user, if available.
- *
- * Generated from `identifiers.adjust_device_id`.
- */
-export const adjustDeviceId = new StringMetricType({
-    category: "identifiers",
-    name: "adjust_device_id",
-    sendInPings: ["events"],
-    lifetime: "ping",
-    disabled: false,
-});
-
-/**
- * The user's FxA account ID, if available.
- *
- * Generated from `identifiers.fxa_account_id`.
- */
-export const fxaAccountId = new StringMetricType({
-    category: "identifiers",
-    name: "fxa_account_id",
-    sendInPings: ["events"],
-    lifetime: "ping",
-    disabled: false,
-});
-
-/**
- * The user's account handle.
+ * The user's full account handle, with domain. For example,
+ * `account_name@mozilla.social`.
  *
  * Generated from `identifiers.mastodon_account_handle`.
  */
@@ -53,20 +28,6 @@ export const mastodonAccountHandle = new StringMetricType({
 export const mastodonAccountId = new StringMetricType({
     category: "identifiers",
     name: "mastodon_account_id",
-    sendInPings: ["events"],
-    lifetime: "application",
-    disabled: false,
-});
-
-/**
- * The domain of the Mastodon instance where the user's Mastodon account is hosted
- * (e.g. `mozilla.social`).
- *
- * Generated from `identifiers.mastodon_instance_domain`.
- */
-export const mastodonInstanceDomain = new StringMetricType({
-    category: "identifiers",
-    name: "mastodon_instance_domain",
     sendInPings: ["events"],
     lifetime: "application",
     disabled: false,
