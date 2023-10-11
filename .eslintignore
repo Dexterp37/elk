@@ -14,3 +14,4 @@ Dockerfile
 elk-translation-status.json
 docs/translation-status.json
 telemetry/generated
+telemetry/README.md

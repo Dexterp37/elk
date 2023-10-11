@@ -4,6 +4,7 @@ import * as log from 'tauri-plugin-log-api'
 import { linkClick, pageUrl, pageView, referrerUrl } from '../../../telemetry/generated/web'
 import { userAgent } from '../../../telemetry/generated/identifiers'
 import { engagement } from '../../../telemetry/generated/ui'
+import { engagementDetails } from '../../../telemetry/engagementDetails'
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('app:mounted', () => {
@@ -32,20 +33,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     function handleButtonClick(ev: MouseEvent) {
       const eventTarget = ev?.target as Element
       const closestButton = eventTarget.closest('button')
-
-      interface EngagementDetails {
-        [propName: string]: {
-          engagement_type: string
-          ui_additional_detail: string
-        }
-      }
-
-      const engagementDetails: EngagementDetails = {
-        'settings.interface.colorMode': {
-          engagement_type: 'general',
-          ui_additional_detail: 'additional deets go here', // todo
-        },
-      }
 
       if (closestButton?.hasAttribute('href'))
         linkClick.record({ target_url: closestButton.getAttribute('href') || '' })

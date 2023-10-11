@@ -136,6 +136,8 @@ nr dev
 
 We are using [glean.js](https://github.com/mozilla/glean.js/) for analytics tracking. Build the necessary generated files by running the `build:glean` script before starting your server.
 
+For more details on developing in Glean, see the [Glean Development Guide](./telemetry/README.md) (note it's currently very much a work in progress).
+
 ### Testing
 
 Elk uses [Vitest](https://vitest.dev). You can run the test suite with:
