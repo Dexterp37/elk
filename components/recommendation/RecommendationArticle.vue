@@ -8,7 +8,7 @@ const {
 }>()
 
 const target = ref<HTMLDivElement>()
-const { isActive } = useIntersectionObserver(target, checkIntersection)
+const { isActive } = useIntersectionObserver(target, checkIntersection, { threshold: 0.5 })
 
 function checkIntersection([{ isIntersecting }]: [{ isIntersecting: boolean }]): void {
   if (isIntersecting && isActive.value) {
