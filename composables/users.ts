@@ -3,6 +3,7 @@ import type { mastodon } from 'masto'
 import type { EffectScope, Ref } from 'vue'
 import type { MaybeRefOrGetter, RemovableRef } from '@vueuse/core'
 import type { ElkMasto } from './masto/masto'
+import { mastodonAccountHandle, mastodonAccountId, mastodonInstanceDomain } from '~/telemetry/generated/identifiers'
 import type { UserLogin } from '~/types'
 import type { Overwrite } from '~/types/utils'
 import {
@@ -166,6 +167,9 @@ export async function loginTo(masto: ElkMasto, user: Overwrite<UserLogin, { acco
     })
   }
 
+  mastodonAccountId.set(me.id)
+  mastodonInstanceDomain.set(user.server)
+  mastodonAccountHandle.set(me.username)
   currentUserHandle.value = me.acct
 }
 
