@@ -16,10 +16,10 @@ When this file has been updated, Kirill will notify us and we need to make chang
 2. Paste that raw JSON in the [`metrics.yaml`](./metrics.yaml) file here in elk, replacing everything that was there before
 3. Check git diff to make sure I understand what is changing between the previous version and this one
 4. Add back the things that the shared [`metrics.yaml`](https://gist.github.com/kirill-demtchouk/41a38336b61b938833fe011bda4a2001) file removes
-    - [Add lifetime parameter back](#lifetime-parameter)
-    - [Add `no_lint` for baseline pings](#no-lint-baseline)
+    - [Add lifetime parameter back](#add-lifetime-parameter-back-to-metrics-that-arent-events)
+    - [Add `no_lint` for baseline pings](#add-no_lint-for-baseline-pings)
 5. Remove the extra things in the shared [`metrics.yaml`](https://gist.github.com/kirill-demtchouk/41a38336b61b938833fe011bda4a2001) file that aren't specific to web
-    - [Remove uneeded metrics](#remove-uneeded)
+    - [Remove uneeded metrics](#remove-metrics-not-needed-for-web)
 6. Now that we've added back all the things that we need for web and removed the extraneous details that we don't need, we need to make sure that all the new additions and removals that we are trying to incorporate from the shared [`metrics.yaml`](<https://gist.github.com/kirill-demtchouk/41a38336b61b938833fe011bda4a2001>) file are included here in elk's [`metric.yaml`](./metrics.yaml) file
 7. Run the `build:glean` script
 8. Delete any old generated files (if needed)
@@ -27,7 +27,7 @@ When this file has been updated, Kirill will notify us and we need to make chang
 
 ## Web-specific `metrics.yaml` file information
 
-### Remove metrics not needed for web {#remove-unneeded}
+### Remove metrics not needed for web
 
 1. In the `identifiers` category:
     - remove `fxa_account_id` - the elk client doesn't get the FxA ID back during auth, only a token so we will never have this
@@ -36,7 +36,7 @@ When this file has been updated, Kirill will notify us and we need to make chang
 2. Remove the `backend` category
     - the whole thing, including the `object_updated` metric
 
-### Add lifetime parameter back to metrics that aren't events {#lifetime-parameter}
+### Add lifetime parameter back to metrics that aren't events
 
 For the events with a type other than `event`, we need to include the `lifetime: application` parameter to make it so that these metrics show up with every ping.
 
@@ -51,7 +51,7 @@ mastodon_account_id:
 
 Note: Aly & Daniel are to sync up on this and try to figure out if there's a different way to accomplish this without using `lifetime: application`. But for now, make sure these are added back when updating the `metrics.yaml` file.
 
-### Add `no_lint` for baseline pings {#no-lint-baseline}
+### Add `no_lint` for baseline pings
 
 Some of the metrics in the shared [`metrics.yaml`](https://gist.github.com/kirill-demtchouk/41a38336b61b938833fe011bda4a2001) file include `baseline` in the `send_in_pings` parameter. If we keep this, the `build:glean` script will fail to build. Rather than removing it, we have opted for adding a `no_lint` declaration instead.
 
