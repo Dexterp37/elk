@@ -14,6 +14,7 @@ const { busy, oauth, singleInstanceServer } = useSignIn()
       v-if="singleInstanceServer"
       flex="~ row" gap-x-2 items-center justify-center btn-solid text-center rounded-3 font-500
       :disabled="busy"
+      data-glean="nav.signup"
       @click="oauth('signup')"
     >
       {{ $t('action.create_account') }}
@@ -22,6 +23,7 @@ const { busy, oauth, singleInstanceServer } = useSignIn()
       v-if="singleInstanceServer"
       flex="~ row" gap-x-2 items-center justify-center btn-outline text-center rounded-3 font-500
       :disabled="busy"
+      data-glean="nav.login"
       @click="oauth()"
     >
       {{ $t('action.sign_in') }}
