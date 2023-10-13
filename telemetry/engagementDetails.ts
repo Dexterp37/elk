@@ -15,4 +15,16 @@ export const engagementDetails: EngagementDetails = {
   'settings.interface.themeColor': {
     engagement_type: 'general',
   },
+  'header.signup': {
+    engagement_type: 'general',
+  },
+  'header.login': {
+    engagement_type: 'general',
+  },
+  'nav.signup': {
+    engagement_type: 'general',
+  },
+  'nav.login': {
+    engagement_type: 'general',
+  },
 }
