@@ -15,4 +15,17 @@ export const engagementDetails: EngagementDetails = {
   'settings.interface.themeColor': {
     engagement_type: 'general',
   },
+
+  'profile.follow.unblock': {
+    engagement_type: 'general',
+  },
+  'profile.follow.unmute': {
+    engagement_type: 'general',
+  },
+  'profile.follow.unfollow': {
+    engagement_type: 'general',
+  },
+  'profile.follow.follow': {
+    engagement_type: 'general',
+  },
 }

@@ -2,9 +2,10 @@
 import type { mastodon } from 'masto'
 import { toggleFollowAccount, useRelationship } from '~~/composables/masto/relationship'
 
-const { account, command, context, ...props } = defineProps<{
+const { account, command, context, gleanContext, ...props } = defineProps<{
   account: mastodon.v1.Account
   relationship?: mastodon.v1.Relationship
+  gleanContext: string
   context?: 'followedBy' | 'following'
   command?: boolean
 }>()
@@ -65,6 +66,23 @@ const buttonStyle = $computed(() => {
   // If not following, use a button style
   return 'text-inverted bg-primary border-primary'
 })
+
+const dataGlean = $computed(() => {
+  if (!gleanContext)
+    return undefined
+
+  let action
+  if (relationship?.blocking)
+    action = 'unblock'
+  else if (relationship?.muting)
+    action = 'unmute'
+  else if (relationship ? relationship.following : context === 'following')
+    action = 'unfollow'
+  else
+    action = 'follow'
+
+  return `${gleanContext}.${action}`
+})
 </script>
 
 <template>
@@ -74,6 +92,7 @@ const buttonStyle = $computed(() => {
     border-1
     rounded-full flex="~ gap2 center" font-500 min-w-30 h-fit px3 py1
     :class="buttonStyle"
+    :data-glean="dataGlean"
     :hover="!relationship?.blocking && !relationship?.muting && relationship?.following ? 'border-red text-red' : 'bg-base border-primary text-primary'"
     @click="relationship?.blocking ? unblock() : relationship?.muting ? unmute() : toggleFollowAccount(relationship!, account)"
   >

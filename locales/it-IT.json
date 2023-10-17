@@ -231,6 +231,7 @@
     "add_personal_note": "Aggiungi nota personale a {0}",
     "block_account": "Blocca {0}",
     "block_domain": "Blocca dominio {0}",
+    "copy_link": "Copia link",
     "copy_link_to_post": "Copia link a questo post",
     "copy_original_link_to_post": "Copia link originale a questo post",
     "delete": "Elimina",

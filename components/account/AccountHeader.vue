@@ -128,7 +128,7 @@ const personalNoteMaxLength = 2000
             >
               {{ $t('settings.profile.appearance.title') }}
             </NuxtLink>
-            <AccountFollowButton :account="account" :command="command" />
+            <AccountFollowButton :account="account" :command="command" glean-context="profile" />
             <span inset-ie-0 flex gap-2 items-center>
               <AccountMoreButton
                 :account="account" :command="command"
