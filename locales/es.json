@@ -231,6 +231,7 @@
     "add_personal_note": "Agregar una nota personal a {0}",
     "block_account": "Bloquear a {0}",
     "block_domain": "Bloquear dominio {0}",
+    "copy_link": "Copiar enlace",
     "copy_link_to_post": "Copiar enlace",
     "copy_original_link_to_post": "Copiar enlace original a esta publicación",
     "delete": "Borrar",

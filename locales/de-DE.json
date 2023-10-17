@@ -231,6 +231,7 @@
     "add_personal_note": "Persönliche Notiz zu {0} hinzufügen",
     "block_account": "Sperre {0}",
     "block_domain": "Sperre Domain {0}",
+    "copy_link": "Link kopieren",
     "copy_link_to_post": "Link zu diesem Beitrag kopieren",
     "copy_original_link_to_post": "Link zum Originalbeitrag kopieren",
     "delete": "Löschen",
