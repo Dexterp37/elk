@@ -73,13 +73,17 @@ const dataGlean = $computed(() => {
 
   let action
   if (relationship?.blocking)
-    action = 'unblock'
+    action = 'follow.unblock'
   else if (relationship?.muting)
-    action = 'unmute'
+    action = 'follow.unmute'
   else if (relationship ? relationship.following : context === 'following')
-    action = 'unfollow'
+    action = 'follow.unfollow'
+  else if (relationship?.requested)
+    action = 'follow.withdraw-follow-request'
+  else if ((relationship ? relationship.followedBy : context === 'followedBy') && account.locked)
+    action = 'follow.follow-request'
   else
-    action = 'follow'
+    action = 'follow.follow'
 
   return `${gleanContext}.${action}`
 })

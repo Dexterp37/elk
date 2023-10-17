@@ -28,4 +28,10 @@ export const engagementDetails: EngagementDetails = {
   'profile.follow.follow': {
     engagement_type: 'general',
   },
+  'profile.follow.withdraw-follow-request': {
+    engagement_type: 'general',
+  },
+  'profile.follow.follow-request': {
+    engagement_type: 'general',
+  },
 }
