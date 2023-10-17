@@ -42,15 +42,12 @@ async function copyLink(url: string): void {
     </div>
   </NuxtLink>
   <div flex flex-justify-end p-3 border="b base">
-    <CommonDropdown flex-none ms3 placement="bottom" :eager-mount="command">
-      <StatusActionButton
-        :content="$t('action.more')"
-        color="text-primary"
-        hover="text-primary"
-        elk-group-hover="bg-primary-light"
-        icon="i-mi:share"
-        text-xl
-      />
+    <CommonDropdown flex-none ms3 placement="bottom">
+      <button flex gap-1 items-center w-full rounded op75 text-xl hover="op100 text-purple" group aria-label="Share actions">
+        <div rounded-5 p2 elk-group-hover="bg-purple/10">
+          <div i-mi:share />
+        </div>
+      </button>
       <template #popper>
         <div flex="~ col">
           <CommonDropdownItem
