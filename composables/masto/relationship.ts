@@ -94,6 +94,16 @@ export async function toggleMuteAccount(relationship: mastodon.v1.Relationship, 
       })
     }
   }
+  else {
+    if (dataGlean) {
+      engagement.record({
+        ui_identifier: dataGlean,
+        mastodon_account_id: account.id,
+        mastodon_account_handle: account.acct,
+        ...engagementDetails[dataGlean],
+      })
+    }
+  }
 
   relationship!.muting = !relationship!.muting
   relationship = relationship!.muting
@@ -124,6 +134,16 @@ export async function toggleBlockAccount(relationship: mastodon.v1.Relationship,
       })
     }
   }
+  else {
+    if (dataGlean) {
+      engagement.record({
+        ui_identifier: dataGlean,
+        mastodon_account_id: account.id,
+        mastodon_account_handle: account.acct,
+        ...engagementDetails[dataGlean],
+      })
+    }
+  }
 
   relationship!.blocking = !relationship!.blocking
   relationship = await client.v1.accounts[relationship!.blocking ? 'block' : 'unblock'](account.id)
@@ -141,6 +161,16 @@ export async function toggleBlockDomain(relationship: mastodon.v1.Relationship, 
     }) !== 'confirm')
       return
 
+    if (dataGlean) {
+      engagement.record({
+        ui_identifier: dataGlean,
+        mastodon_account_id: account.id,
+        mastodon_account_handle: account.acct,
+        ...engagementDetails[dataGlean],
+      })
+    }
+  }
+  else {
     if (dataGlean) {
       engagement.record({
         ui_identifier: dataGlean,

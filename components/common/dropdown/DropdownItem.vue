@@ -6,7 +6,7 @@ const props = withDefaults(defineProps<{
   icon?: string
   checked?: boolean
   command?: boolean
-  dataGlean: string
+  dataGlean?: string
 }>(), {
   is: 'div',
 })

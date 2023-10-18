@@ -24,6 +24,12 @@ const useStarFavoriteIcon = usePreferences('useStarFavoriteIcon')
 const { share, isSupported: isShareSupported } = useShare()
 
 function shareAccount() {
+  engagement.record({
+    ui_identifier: 'profile.more.share_account',
+    mastodon_account_id: account.id,
+    mastodon_account_handle: account.acct,
+    ...engagementDetails['profile.more.share_account'],
+  })
   share({ url: location.href })
 }
 
@@ -43,21 +49,54 @@ async function toggleReblogs() {
       ...engagementDetails['profile.more.show_boosts'],
     })
   }
+  else {
+    engagement.record({
+      ui_identifier: 'profile.more.hide_boosts',
+      mastodon_account_id: account.id,
+      mastodon_account_handle: account.acct,
+      ...engagementDetails['profile.more.hide_boosts'],
+    })
+  }
+
   const showingReblogs = !relationship?.showingReblogs
   relationship = await client.v1.accounts.follow(account.id, { reblogs: showingReblogs })
 }
 
 async function addUserNote() {
+  engagement.record({
+    ui_identifier: 'profile.more.add_note',
+    mastodon_account_id: account.id,
+    mastodon_account_handle: account.acct,
+    ...engagementDetails['profile.more.add_note'],
+  })
+
   emit('addNote')
 }
 
 async function removeUserNote() {
+  engagement.record({
+    ui_identifier: 'profile.more.remove_note',
+    mastodon_account_id: account.id,
+    mastodon_account_handle: account.acct,
+    ...engagementDetails['profile.more.remove_note'],
+  })
+
   if (!relationship!.note || relationship!.note.length === 0)
     return
 
   const newNote = await client.v1.accounts.createNote(account.id, { comment: '' })
   relationship!.note = newNote.note
   emit('removeNote')
+}
+
+function report() {
+  engagement.record({
+    ui_identifier: 'profile.more.report',
+    mastodon_account_id: account.id,
+    mastodon_account_handle: account.acct,
+    ...engagementDetails['profile.more.report'],
+  })
+  openReportDialog(account)
 }
 </script>
 
@@ -85,7 +124,6 @@ async function removeUserNote() {
         :text="`Share @${account.acct}`"
         icon="i-ri:share-line"
         :command="command"
-        data-glean="profile.more.share_account"
         @click="shareAccount()"
       />
 
@@ -96,16 +134,14 @@ async function removeUserNote() {
             :text="$t('menu.mention_account', [`@${account.acct}`])"
             icon="i-ri:at-line"
             :command="command"
-            data-glean="profile.more.mention"
-            @click="mentionUser(account)"
+            @click="mentionUser(account, 'profile.more.mention')"
           />
           <CommonDropdownItem
             is="button"
             :text="$t('menu.direct_message_account', [`@${account.acct}`])"
             icon="i-ri:message-3-line"
             :command="command"
-            data-glean="profile.more.direct_message"
-            @click="directMessageUser(account)"
+            @click="directMessageUser(account, 'profile.more.direct_message')"
           />
 
           <CommonDropdownItem
@@ -122,7 +158,6 @@ async function removeUserNote() {
             :text="$t('menu.hide_reblogs', [`@${account.acct}`])"
             icon="i-ri:repeat-line"
             :command="command"
-            data-glean="profile.more.hide_boosts"
             @click="toggleReblogs()"
           />
 
@@ -132,7 +167,6 @@ async function removeUserNote() {
             :text="$t('menu.add_personal_note', [`@${account.acct}`])"
             icon="i-ri-edit-2-line"
             :command="command"
-            data-glean="profile.more.add_note"
             @click="addUserNote()"
           />
           <CommonDropdownItem
@@ -141,7 +175,6 @@ async function removeUserNote() {
             :text="$t('menu.remove_personal_note', [`@${account.acct}`])"
             icon="i-ri-edit-2-line"
             :command="command"
-            data-glean="profile.more.remove_note"
             @click="removeUserNote()"
           />
 
@@ -159,8 +192,7 @@ async function removeUserNote() {
             :text="$t('menu.unmute_account', [`@${account.acct}`])"
             icon="i-ri:volume-up-fill"
             :command="command"
-            data-glean="profile.more.unmute"
-            @click="toggleMuteAccount (relationship!, account)"
+            @click="toggleMuteAccount (relationship!, account, 'profile.more.unmute')"
           />
 
           <CommonDropdownItem
@@ -177,8 +209,7 @@ async function removeUserNote() {
             :text="$t('menu.unblock_account', [`@${account.acct}`])"
             icon="i-ri:checkbox-circle-line"
             :command="command"
-            data-glean="profile.more.unblock"
-            @click="toggleBlockAccount (relationship!, account)"
+            @click="toggleBlockAccount (relationship!, account, 'profile.more.unblock')"
           />
 
           <template v-if="getServerName(account) !== currentServer">
@@ -196,8 +227,7 @@ async function removeUserNote() {
               :text="$t('menu.unblock_domain', [getServerName(account)])"
               icon="i-ri:restart-line"
               :command="command"
-              data-glean="profile.more.unblock_domain"
-              @click="toggleBlockDomain(relationship!, account)"
+              @click="toggleBlockDomain(relationship!, account, 'profile.more.unblock_domain')"
             />
           </template>
 
@@ -206,8 +236,7 @@ async function removeUserNote() {
             :text="$t('menu.report_account', [`@${account.acct}`])"
             icon="i-ri:flag-2-line"
             :command="command"
-            data-glean="profile.more.report"
-            @click="openReportDialog(account)"
+            @click="report()"
           />
         </template>
 
