@@ -25,10 +25,11 @@ const sanitizer = sanitize({
   br: {},
   p: {},
   a: {
-    href: filterHref(),
-    class: sanitizerBasicClasses,
-    rel: set('nofollow noopener noreferrer'),
-    target: set('_blank'),
+    'href': filterHref(),
+    'class': sanitizerBasicClasses,
+    'rel': set('nofollow noopener noreferrer'),
+    'target': set('_blank'),
+    'data-glean': keep,
   },
   span: {
     class: sanitizerBasicClasses,

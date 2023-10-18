@@ -11,13 +11,26 @@ const {
   withAction?: boolean
 }>()
 
+// I took this from stackoverflow
+function insertString(str, index, value) {
+  return str.substr(0, index) + value + str.substr(index)
+}
+
+function hack(content) {
+  let copy = content
+  const regex = new RegExp('<a href', 'gi')
+  for (const index of [...copy.matchAll(regex)].map(a => a.index).reverse())
+    copy = insertString(copy, index, '<a data-glean="post.link.tap" href')
+  return copy
+}
+
 const { translation } = useTranslation(status, getLanguageCode())
 
 const emojisObject = useEmojisFallback(() => status.emojis)
 const vnode = $computed(() => {
   if (!status.content)
     return null
-  const vnode = contentToVNode(status.content, {
+  const vnode = contentToVNode(hack(status.content), {
     emojis: emojisObject.value,
     mentions: 'mentions' in status ? status.mentions : undefined,
     markdown: true,
