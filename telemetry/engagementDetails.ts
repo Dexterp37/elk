@@ -100,6 +100,17 @@ const profileEvents = {
   'profile.modify_lists': {
     engagement_type: 'general',
   },
+  // details
+  'profile.details.posts': {
+    engagement_type: 'general',
+  },
+  'profile.details.following': {
+    engagement_type: 'general',
+  },
+  'profile.details.followers': {
+    engagement_type: 'general',
+  },
+
 }
 
 export const engagementDetails: EngagementDetails = {
