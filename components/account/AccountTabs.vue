@@ -16,7 +16,7 @@ const tabs = $computed<CommonRouteTabOption[]>(() => [
     },
     display: t('tab.posts'),
     icon: 'i-ri:file-list-2-line',
-    gleanData: 'profile.tabs.posts',
+    dataGlean: 'profile.tabs.posts',
   },
   {
     name: 'account-replies',
@@ -26,7 +26,7 @@ const tabs = $computed<CommonRouteTabOption[]>(() => [
     },
     display: t('tab.posts_with_replies'),
     icon: 'i-ri:chat-1-line',
-    gleanData: 'profile.tabs.posts_and_replies',
+    dataGlean: 'profile.tabs.posts_and_replies',
   },
   {
     name: 'account-media',
@@ -36,7 +36,7 @@ const tabs = $computed<CommonRouteTabOption[]>(() => [
     },
     display: t('tab.media'),
     icon: 'i-ri:camera-2-line',
-    gleanData: 'profile.tabs.media',
+    dataGlean: 'profile.tabs.media',
   },
 ])
 </script>
