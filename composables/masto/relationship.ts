@@ -1,5 +1,7 @@
 import type { mastodon } from 'masto'
 import type { Ref } from 'vue'
+import { engagement } from '~~/telemetry/generated/ui'
+import { engagementDetails } from '~~/telemetry/engagementDetails'
 
 // Batch requests for relationships when used in the UI
 // We don't want to hold to old values, so every time a Relationship is needed it
@@ -32,12 +34,13 @@ async function fetchRelationships() {
     requested[i][1].value = relationships[i]
 }
 
-export async function toggleFollowAccount(relationship: mastodon.v1.Relationship, account: mastodon.v1.Account) {
+export async function toggleFollowAccount(relationship: mastodon.v1.Relationship, account: mastodon.v1.Account, dataGlean?: string) {
   const { client } = $(useMasto())
   const i18n = useNuxtApp().$i18n
 
   const unfollow = relationship!.following || relationship!.requested
 
+  // Dialog box for unfollow
   if (unfollow) {
     if (await openConfirmDialog({
       title: i18n.t('confirm.unfollow.title'),
@@ -45,6 +48,15 @@ export async function toggleFollowAccount(relationship: mastodon.v1.Relationship
       cancel: i18n.t('confirm.unfollow.cancel'),
     }) !== 'confirm')
       return
+
+    if (dataGlean) {
+      engagement.record({
+        ui_identifier: dataGlean,
+        mastodon_account_id: account.id,
+        mastodon_account_handle: account.acct,
+        ...engagementDetails[dataGlean],
+      })
+    }
   }
 
   if (unfollow) {

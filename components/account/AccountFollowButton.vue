@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { mastodon } from 'masto'
+import { engagement } from '~~/telemetry/generated/ui'
+import { engagementDetails } from '~~/telemetry/engagementDetails'
 import { toggleFollowAccount, useRelationship } from '~~/composables/masto/relationship'
 
 const { account, command, context, gleanContext, ...props } = defineProps<{
@@ -67,6 +69,8 @@ const buttonStyle = $computed(() => {
   return 'text-inverted bg-primary border-primary'
 })
 
+const mastodon_account_id = account.id
+const mastodon_account_handle = account.acct
 const dataGlean = $computed(() => {
   if (!gleanContext)
     return undefined
@@ -87,6 +91,24 @@ const dataGlean = $computed(() => {
 
   return `${gleanContext}.${action}`
 })
+
+function handleClick() {
+  // It might be better to blacklist against dataGlean minus gleanContext, but too much work
+  const blacklist = [
+    'profile.follow.unfollow', // unfollow goes to a modal. see toggleFollowAccount
+  ]
+
+  if (!blacklist.includes(dataGlean)) {
+    engagement.record({
+      ui_identifier: dataGlean,
+      mastodon_account_id,
+      mastodon_account_handle,
+      ...engagementDetails[dataGlean],
+    })
+  }
+
+  return relationship?.blocking ? unblock() : relationship?.muting ? unmute() : toggleFollowAccount(relationship!, account, dataGlean)
+}
 </script>
 
 <template>
@@ -96,9 +118,8 @@ const dataGlean = $computed(() => {
     border-1
     rounded-full flex="~ gap2 center" font-500 min-w-30 h-fit px3 py1
     :class="buttonStyle"
-    :data-glean="dataGlean"
     :hover="!relationship?.blocking && !relationship?.muting && relationship?.following ? 'border-red text-red' : 'bg-base border-primary text-primary'"
-    @click="relationship?.blocking ? unblock() : relationship?.muting ? unmute() : toggleFollowAccount(relationship!, account)"
+    @click="handleClick"
   >
     <template v-if="relationship?.blocking">
       <span elk-group-hover="hidden">{{ $t('account.blocking') }}</span>
