@@ -93,21 +93,27 @@ const dataGlean = $computed(() => {
 })
 
 function handleClick() {
-  // It might be better to blacklist against dataGlean minus gleanContext, but too much work
-  const blacklist = [
-    'profile.follow.unfollow', // unfollow goes to a modal. see toggleFollowAccount
-  ]
+  if (relationship?.blocking)
+    return unblock()
 
-  if (!blacklist.includes(dataGlean)) {
-    engagement.record({
-      ui_identifier: dataGlean,
-      mastodon_account_id,
-      mastodon_account_handle,
-      ...engagementDetails[dataGlean],
-    })
-  }
+  if (relationship?.muting)
+    return unmute()
 
-  return relationship?.blocking ? unblock() : relationship?.muting ? unmute() : toggleFollowAccount(relationship!, account, dataGlean)
+  const unfollow = relationship!.following || relationship!.requested
+
+  // Unfollow actions require a 2nd layer of confirmation from the dialogue resulted from toggleFollowAccount.
+  // They are 'follow.unfollow' and 'follow.withdraw-follow-request'
+  if (unfollow)
+    return toggleFollowAccount(relationship!, account, dataGlean)
+
+  engagement.record({
+    ui_identifier: dataGlean,
+    mastodon_account_id,
+    mastodon_account_handle,
+    ...engagementDetails[dataGlean],
+  })
+
+  return toggleFollowAccount(relationship!, account)
 }
 </script>
 
