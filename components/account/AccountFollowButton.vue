@@ -69,8 +69,6 @@ const buttonStyle = $computed(() => {
   return 'text-inverted bg-primary border-primary'
 })
 
-const mastodon_account_id = account.id
-const mastodon_account_handle = account.acct
 const dataGlean = $computed(() => {
   if (!gleanContext)
     return undefined
@@ -93,25 +91,26 @@ const dataGlean = $computed(() => {
 })
 
 function handleClick() {
-  if (relationship?.blocking)
-    return unblock()
+  const unfollow = relationship?.following || relationship?.requested
 
-  if (relationship?.muting)
-    return unmute()
-
-  const unfollow = relationship!.following || relationship!.requested
-
-  // Unfollow actions require a 2nd layer of confirmation from the dialogue resulted from toggleFollowAccount.
-  // They are 'follow.unfollow' and 'follow.withdraw-follow-request'
+  // Unfollow actions require a 2nd layer of confirmation from the dialogue triggered by toggleFollowAccount,
+  // so we skip sending engagement events here
+  // See 'follow.unfollow' and 'follow.withdraw-follow-request'
   if (unfollow)
     return toggleFollowAccount(relationship!, account, dataGlean)
 
   engagement.record({
     ui_identifier: dataGlean,
-    mastodon_account_id,
-    mastodon_account_handle,
+    mastodon_account_id: account.id,
+    mastodon_account_handle: account.acct,
     ...engagementDetails[dataGlean],
   })
+
+  if (relationship?.blocking)
+    return unblock()
+
+  if (relationship?.muting)
+    return unmute()
 
   return toggleFollowAccount(relationship!, account)
 }
