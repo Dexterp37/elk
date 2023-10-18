@@ -15,7 +15,7 @@ export const engagementDetails: EngagementDetails = {
   'settings.interface.themeColor': {
     engagement_type: 'general',
   },
-
+  // profile follow button
   'profile.follow.unblock': {
     engagement_type: 'general',
   },
@@ -34,9 +34,7 @@ export const engagementDetails: EngagementDetails = {
   'profile.follow.follow-request': {
     engagement_type: 'general',
   },
-  'a': {
-    engagement_type: 'general',
-  },
+  // profile more button
   'profile.more.open': {
     engagement_type: 'general',
   },
@@ -98,6 +96,13 @@ export const engagementDetails: EngagementDetails = {
     engagement_type: 'general',
   },
   'profile.more.goto_domain_blocks': {
+    engagement_type: 'general',
+  },
+  // profile notifications
+  'profile.notify_start': {
+    engagement_type: 'general',
+  },
+  'profile.notify_stop': {
     engagement_type: 'general',
   },
 }

@@ -141,6 +141,7 @@ const personalNoteMaxLength = 2000
                   :aria-label="t('account.notifications_on_post_enable', { username: `@${account.username}` })"
                   rounded-full text-sm p2 border-1 transition-colors
                   :class="isNotifiedOnPost ? 'text-primary border-primary hover:bg-red/20 hover:text-red hover:border-red' : 'border-base hover:text-primary'"
+                  :data-glean="isNotifiedOnPost ? 'profile.notify_stop' : 'profile.notify_start'"
                   @click="toggleNotifications"
                 >
                   <span v-if="isNotifiedOnPost" i-ri:notification-4-fill block text-current />
