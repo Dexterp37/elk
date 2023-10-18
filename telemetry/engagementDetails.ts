@@ -5,17 +5,8 @@ interface EngagementDetails {
   }
 }
 
-export const engagementDetails: EngagementDetails = {
-  'settings.interface.colorMode': {
-    engagement_type: 'general',
-  },
-  'settings.interface.fontSize': {
-    engagement_type: 'general',
-  },
-  'settings.interface.themeColor': {
-    engagement_type: 'general',
-  },
-  // profile follow button
+const profileEvents = {
+  // follow button
   'profile.follow.unblock': {
     engagement_type: 'general',
   },
@@ -34,7 +25,7 @@ export const engagementDetails: EngagementDetails = {
   'profile.follow.follow-request': {
     engagement_type: 'general',
   },
-  // profile more button
+  // more button
   'profile.more.open': {
     engagement_type: 'general',
   },
@@ -98,15 +89,28 @@ export const engagementDetails: EngagementDetails = {
   'profile.more.goto_domain_blocks': {
     engagement_type: 'general',
   },
-  // profile notifications
+  // notifications
   'profile.notify_start': {
     engagement_type: 'general',
   },
   'profile.notify_stop': {
     engagement_type: 'general',
   },
-  // profile notifications
+  // modify lists
   'profile.modify_lists': {
     engagement_type: 'general',
   },
+}
+
+export const engagementDetails: EngagementDetails = {
+  'settings.interface.colorMode': {
+    engagement_type: 'general',
+  },
+  'settings.interface.fontSize': {
+    engagement_type: 'general',
+  },
+  'settings.interface.themeColor': {
+    engagement_type: 'general',
+  },
+  ...profileEvents,
 }
