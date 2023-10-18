@@ -105,4 +105,8 @@ export const engagementDetails: EngagementDetails = {
   'profile.notify_stop': {
     engagement_type: 'general',
   },
+  // profile notifications
+  'profile.modify_lists': {
+    engagement_type: 'general',
+  },
 }

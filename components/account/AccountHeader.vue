@@ -154,6 +154,7 @@ const personalNoteMaxLength = 2000
                     :aria-label="$t('list.modify_account')"
                     rounded-full text-sm p2 border-1 transition-colors
                     border-base hover:text-primary
+                    data-glean="profile.modify_lists"
                   >
                     <span i-ri:play-list-add-fill block text-current />
                   </button>
