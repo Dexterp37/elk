@@ -6,6 +6,7 @@ const props = withDefaults(defineProps<{
   icon?: string
   checked?: boolean
   command?: boolean
+  dataGlean: string
 }>(), {
   is: 'div',
 })
@@ -51,6 +52,7 @@ useCommand({
     select-none
     hover-bg-active
     :aria-label="text"
+    :data-glean="props.dataGlean"
     @click="handleClick"
   >
     <div v-if="icon" :class="icon" />

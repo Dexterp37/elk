@@ -34,4 +34,70 @@ export const engagementDetails: EngagementDetails = {
   'profile.follow.follow-request': {
     engagement_type: 'general',
   },
+  'a': {
+    engagement_type: 'general',
+  },
+  'profile.more.open': {
+    engagement_type: 'general',
+  },
+  'profile.more.open_in_original_site': {
+    engagement_type: 'general',
+  },
+  'profile.more.share_account': {
+    engagement_type: 'general',
+  },
+  'profile.more.mention': {
+    engagement_type: 'general',
+  },
+  'profile.more.direct_message': {
+    engagement_type: 'general',
+  },
+  'profile.more.show_boosts': {
+    engagement_type: 'general',
+  },
+  'profile.more.hide_boosts': {
+    engagement_type: 'general',
+  },
+  'profile.more.add_note': {
+    engagement_type: 'general',
+  },
+  'profile.more.remove_note': {
+    engagement_type: 'general',
+  },
+  'profile.more.mute': {
+    engagement_type: 'general',
+  },
+  'profile.more.unmute': {
+    engagement_type: 'general',
+  },
+  'profile.more.block': {
+    engagement_type: 'general',
+  },
+  'profile.more.unblock': {
+    engagement_type: 'general',
+  },
+  'profile.more.block_domain': {
+    engagement_type: 'general',
+  },
+  'profile.more.unblock_domain': {
+    engagement_type: 'general',
+  },
+  'profile.more.report': {
+    engagement_type: 'general',
+  },
+  'profile.more.goto_pinned': {
+    engagement_type: 'general',
+  },
+  'profile.more.goto_favorites': {
+    engagement_type: 'general',
+  },
+  'profile.more.goto_mutes': {
+    engagement_type: 'general',
+  },
+  'profile.more.goto_blocks': {
+    engagement_type: 'general',
+  },
+  'profile.more.goto_domain_blocks': {
+    engagement_type: 'general',
+  },
 }

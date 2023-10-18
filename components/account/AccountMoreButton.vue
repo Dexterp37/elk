@@ -53,7 +53,7 @@ async function removeUserNote() {
 
 <template>
   <CommonDropdown :eager-mount="command">
-    <button flex gap-1 items-center w-full rounded op75 hover="op100 text-purple" group aria-label="More actions">
+    <button flex gap-1 items-center w-full rounded op75 hover="op100 text-purple" group aria-label="More actions" data-glean="profile.more.open">
       <div rounded-5 p2 elk-group-hover="bg-purple/10">
         <div i-ri:more-2-fill />
       </div>
@@ -65,6 +65,7 @@ async function removeUserNote() {
           :text="$t('menu.open_in_original_site')"
           icon="i-ri:arrow-right-up-line"
           :command="command"
+          data-glean="profile.more.open_in_original_site"
         />
       </NuxtLink>
       <CommonDropdownItem
@@ -72,6 +73,7 @@ async function removeUserNote() {
         :text="`Share @${account.acct}`"
         icon="i-ri:share-line"
         :command="command"
+        data-glean="profile.more.share_account"
         @click="shareAccount()"
       />
 
@@ -81,12 +83,14 @@ async function removeUserNote() {
             :text="$t('menu.mention_account', [`@${account.acct}`])"
             icon="i-ri:at-line"
             :command="command"
+            data-glean="profile.more.mention"
             @click="mentionUser(account)"
           />
           <CommonDropdownItem
             :text="$t('menu.direct_message_account', [`@${account.acct}`])"
             icon="i-ri:message-3-line"
             :command="command"
+            data-glean="profile.more.direct_message"
             @click="directMessageUser(account)"
           />
 
@@ -95,6 +99,7 @@ async function removeUserNote() {
             icon="i-ri:repeat-line"
             :text="$t('menu.show_reblogs', [`@${account.acct}`])"
             :command="command"
+            data-glean="profile.more.show_boosts"
             @click="toggleReblogs()"
           />
           <CommonDropdownItem
@@ -102,6 +107,7 @@ async function removeUserNote() {
             :text="$t('menu.hide_reblogs', [`@${account.acct}`])"
             icon="i-ri:repeat-line"
             :command="command"
+            data-glean="profile.more.hide_boosts"
             @click="toggleReblogs()"
           />
 
@@ -110,6 +116,7 @@ async function removeUserNote() {
             :text="$t('menu.add_personal_note', [`@${account.acct}`])"
             icon="i-ri-edit-2-line"
             :command="command"
+            data-glean="profile.more.add_note"
             @click="addUserNote()"
           />
           <CommonDropdownItem
@@ -117,6 +124,7 @@ async function removeUserNote() {
             :text="$t('menu.remove_personal_note', [`@${account.acct}`])"
             icon="i-ri-edit-2-line"
             :command="command"
+            data-glean="profile.more.remove_note"
             @click="removeUserNote()"
           />
 
@@ -125,6 +133,7 @@ async function removeUserNote() {
             :text="$t('menu.mute_account', [`@${account.acct}`])"
             icon="i-ri:volume-mute-line"
             :command="command"
+            data-glean="profile.more.mute"
             @click="toggleMuteAccount (relationship!, account)"
           />
           <CommonDropdownItem
@@ -132,6 +141,7 @@ async function removeUserNote() {
             :text="$t('menu.unmute_account', [`@${account.acct}`])"
             icon="i-ri:volume-up-fill"
             :command="command"
+            data-glean="profile.more.unmute"
             @click="toggleMuteAccount (relationship!, account)"
           />
 
@@ -140,6 +150,7 @@ async function removeUserNote() {
             :text="$t('menu.block_account', [`@${account.acct}`])"
             icon="i-ri:forbid-2-line"
             :command="command"
+            data-glean="profile.more.block"
             @click="toggleBlockAccount (relationship!, account)"
           />
           <CommonDropdownItem
@@ -147,6 +158,7 @@ async function removeUserNote() {
             :text="$t('menu.unblock_account', [`@${account.acct}`])"
             icon="i-ri:checkbox-circle-line"
             :command="command"
+            data-glean="profile.more.unblock"
             @click="toggleBlockAccount (relationship!, account)"
           />
 
@@ -156,6 +168,7 @@ async function removeUserNote() {
               :text="$t('menu.block_domain', [getServerName(account)])"
               icon="i-ri:shut-down-line"
               :command="command"
+              data-glean="profile.more.block_domain"
               @click="toggleBlockDomain(relationship!, account)"
             />
             <CommonDropdownItem
@@ -163,6 +176,7 @@ async function removeUserNote() {
               :text="$t('menu.unblock_domain', [getServerName(account)])"
               icon="i-ri:restart-line"
               :command="command"
+              data-glean="profile.more.unblock_domain"
               @click="toggleBlockDomain(relationship!, account)"
             />
           </template>
@@ -171,25 +185,26 @@ async function removeUserNote() {
             :text="$t('menu.report_account', [`@${account.acct}`])"
             icon="i-ri:flag-2-line"
             :command="command"
+            data-glean="profile.more.report"
             @click="openReportDialog(account)"
           />
         </template>
 
         <template v-else>
           <NuxtLink to="/pinned">
-            <CommonDropdownItem :text="$t('account.pinned')" icon="i-ri:pushpin-line" :command="command" />
+            <CommonDropdownItem :text="$t('account.pinned')" icon="i-ri:pushpin-line" :command="command" data-glean="profile.more.goto_pinned" />
           </NuxtLink>
           <NuxtLink to="/favourites">
-            <CommonDropdownItem :text="$t('account.favourites')" :icon="useStarFavoriteIcon ? 'i-ri:star-line' : 'i-ri:heart-3-line'" :command="command" />
+            <CommonDropdownItem :text="$t('account.favourites')" :icon="useStarFavoriteIcon ? 'i-ri:star-line' : 'i-ri:heart-3-line'" :command="command" data-glean="profile.more.goto_favorites" />
           </NuxtLink>
           <NuxtLink to="/mutes">
-            <CommonDropdownItem :text="$t('account.muted_users')" icon="i-ri:volume-mute-line" :command="command" />
+            <CommonDropdownItem :text="$t('account.muted_users')" icon="i-ri:volume-mute-line" :command="command" data-glean="profile.more.goto_mutes" />
           </NuxtLink>
           <NuxtLink to="/blocks">
-            <CommonDropdownItem :text="$t('account.blocked_users')" icon="i-ri:forbid-2-line" :command="command" />
+            <CommonDropdownItem :text="$t('account.blocked_users')" icon="i-ri:forbid-2-line" :command="command" data-glean="profile.more.goto_blocks" />
           </NuxtLink>
           <NuxtLink to="/domain_blocks">
-            <CommonDropdownItem :text="$t('account.blocked_domains')" icon="i-ri:shut-down-line" :command="command" />
+            <CommonDropdownItem :text="$t('account.blocked_domains')" icon="i-ri:shut-down-line" :command="command" data-glean="profile.more.goto_domain_blocks" />
           </NuxtLink>
         </template>
       </template>
