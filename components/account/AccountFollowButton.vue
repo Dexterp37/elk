@@ -7,7 +7,7 @@ import { toggleFollowAccount, useRelationship } from '~~/composables/masto/relat
 const { account, command, context, gleanContext, ...props } = defineProps<{
   account: mastodon.v1.Account
   relationship?: mastodon.v1.Relationship
-  gleanContext: string
+  gleanContext?: string
   context?: 'followedBy' | 'following'
   command?: boolean
 }>()
