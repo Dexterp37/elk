@@ -18,7 +18,7 @@ export const profileEvents = {
   'profile.follow.follow-request': {
     engagement_type: 'general',
   },
-  // more button
+  // more button and more options dropdown
   'profile.more.open': {
     engagement_type: 'general',
   },
@@ -93,7 +93,7 @@ export const profileEvents = {
   'profile.modify_lists': {
     engagement_type: 'general',
   },
-  // details
+  // metrics details (# of posts, # of following, # of followers)
   'profile.details.posts': {
     engagement_type: 'general',
   },
@@ -103,7 +103,7 @@ export const profileEvents = {
   'profile.details.followers': {
     engagement_type: 'general',
   },
-  // tabs
+  // tabs (posts, post & replies, media)
   'profile.tabs.posts': {
     engagement_type: 'general',
   },
