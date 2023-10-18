@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { mastodon } from 'masto'
 import { toggleBlockAccount, toggleBlockDomain, toggleMuteAccount } from '~~/composables/masto/relationship'
+import { engagement } from '~~/telemetry/generated/ui'
+import { engagementDetails } from '~~/telemetry/engagementDetails'
 
 const { account } = defineProps<{
   account: mastodon.v1.Account
@@ -26,13 +28,21 @@ function shareAccount() {
 }
 
 async function toggleReblogs() {
-  if (!relationship!.showingReblogs && await openConfirmDialog({
-    title: t('confirm.show_reblogs.title', [account.acct]),
-    confirm: t('confirm.show_reblogs.confirm'),
-    cancel: t('confirm.show_reblogs.cancel'),
-  }) !== 'confirm')
-    return
+  if (!relationship!.showingReblogs) {
+    if (await openConfirmDialog({
+      title: t('confirm.show_reblogs.title', [account.acct]),
+      confirm: t('confirm.show_reblogs.confirm'),
+      cancel: t('confirm.show_reblogs.cancel'),
+    }) !== 'confirm')
+      return
 
+    engagement.record({
+      ui_identifier: 'profile.more.show_boosts',
+      mastodon_account_id: account.id,
+      mastodon_account_handle: account.acct,
+      ...engagementDetails['profile.more.show_boosts'],
+    })
+  }
   const showingReblogs = !relationship?.showingReblogs
   relationship = await client.v1.accounts.follow(account.id, { reblogs: showingReblogs })
 }
@@ -104,7 +114,6 @@ async function removeUserNote() {
             icon="i-ri:repeat-line"
             :text="$t('menu.show_reblogs', [`@${account.acct}`])"
             :command="command"
-            data-glean="profile.more.show_boosts"
             @click="toggleReblogs()"
           />
           <CommonDropdownItem
@@ -142,8 +151,7 @@ async function removeUserNote() {
             :text="$t('menu.mute_account', [`@${account.acct}`])"
             icon="i-ri:volume-mute-line"
             :command="command"
-            data-glean="profile.more.mute"
-            @click="toggleMuteAccount (relationship!, account)"
+            @click="toggleMuteAccount (relationship!, account, 'profile.more.mute')"
           />
           <CommonDropdownItem
             is="button"
@@ -161,8 +169,7 @@ async function removeUserNote() {
             :text="$t('menu.block_account', [`@${account.acct}`])"
             icon="i-ri:forbid-2-line"
             :command="command"
-            data-glean="profile.more.block"
-            @click="toggleBlockAccount (relationship!, account)"
+            @click="toggleBlockAccount (relationship!, account, 'profile.more.block')"
           />
           <CommonDropdownItem
             is="button"
@@ -181,8 +188,7 @@ async function removeUserNote() {
               :text="$t('menu.block_domain', [getServerName(account)])"
               icon="i-ri:shut-down-line"
               :command="command"
-              data-glean="profile.more.block_domain"
-              @click="toggleBlockDomain(relationship!, account)"
+              @click="toggleBlockDomain(relationship!, account, 'profile.more.block_domain')"
             />
             <CommonDropdownItem
               is="button"

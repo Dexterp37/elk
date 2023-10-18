@@ -73,16 +73,27 @@ export async function toggleFollowAccount(relationship: mastodon.v1.Relationship
   relationship = await client.v1.accounts[unfollow ? 'unfollow' : 'follow'](account.id)
 }
 
-export async function toggleMuteAccount(relationship: mastodon.v1.Relationship, account: mastodon.v1.Account) {
+export async function toggleMuteAccount(relationship: mastodon.v1.Relationship, account: mastodon.v1.Account, dataGlean?: string) {
   const { client } = $(useMasto())
   const i18n = useNuxtApp().$i18n
 
-  if (!relationship!.muting && await openConfirmDialog({
-    title: i18n.t('confirm.mute_account.title', [account.acct]),
-    confirm: i18n.t('confirm.mute_account.confirm'),
-    cancel: i18n.t('confirm.mute_account.cancel'),
-  }) !== 'confirm')
-    return
+  if (!relationship!.muting) {
+    if (await openConfirmDialog({
+      title: i18n.t('confirm.mute_account.title', [account.acct]),
+      confirm: i18n.t('confirm.mute_account.confirm'),
+      cancel: i18n.t('confirm.mute_account.cancel'),
+    }) !== 'confirm')
+      return
+
+    if (dataGlean) {
+      engagement.record({
+        ui_identifier: dataGlean,
+        mastodon_account_id: account.id,
+        mastodon_account_handle: account.acct,
+        ...engagementDetails[dataGlean],
+      })
+    }
+  }
 
   relationship!.muting = !relationship!.muting
   relationship = relationship!.muting
@@ -92,31 +103,53 @@ export async function toggleMuteAccount(relationship: mastodon.v1.Relationship, 
     : await client.v1.accounts.unmute(account.id)
 }
 
-export async function toggleBlockAccount(relationship: mastodon.v1.Relationship, account: mastodon.v1.Account) {
+export async function toggleBlockAccount(relationship: mastodon.v1.Relationship, account: mastodon.v1.Account, dataGlean?: string) {
   const { client } = $(useMasto())
   const i18n = useNuxtApp().$i18n
 
-  if (!relationship!.blocking && await openConfirmDialog({
-    title: i18n.t('confirm.block_account.title', [account.acct]),
-    confirm: i18n.t('confirm.block_account.confirm'),
-    cancel: i18n.t('confirm.block_account.cancel'),
-  }) !== 'confirm')
-    return
+  if (!relationship!.blocking) {
+    if (await openConfirmDialog({
+      title: i18n.t('confirm.block_account.title', [account.acct]),
+      confirm: i18n.t('confirm.block_account.confirm'),
+      cancel: i18n.t('confirm.block_account.cancel'),
+    }) !== 'confirm')
+      return
+
+    if (dataGlean) {
+      engagement.record({
+        ui_identifier: dataGlean,
+        mastodon_account_id: account.id,
+        mastodon_account_handle: account.acct,
+        ...engagementDetails[dataGlean],
+      })
+    }
+  }
 
   relationship!.blocking = !relationship!.blocking
   relationship = await client.v1.accounts[relationship!.blocking ? 'block' : 'unblock'](account.id)
 }
 
-export async function toggleBlockDomain(relationship: mastodon.v1.Relationship, account: mastodon.v1.Account) {
+export async function toggleBlockDomain(relationship: mastodon.v1.Relationship, account: mastodon.v1.Account, dataGlean?: string) {
   const { client } = $(useMasto())
   const i18n = useNuxtApp().$i18n
 
-  if (!relationship!.domainBlocking && await openConfirmDialog({
-    title: i18n.t('confirm.block_domain.title', [getServerName(account)]),
-    confirm: i18n.t('confirm.block_domain.confirm'),
-    cancel: i18n.t('confirm.block_domain.cancel'),
-  }) !== 'confirm')
-    return
+  if (!relationship!.domainBlocking) {
+    if (await openConfirmDialog({
+      title: i18n.t('confirm.block_domain.title', [getServerName(account)]),
+      confirm: i18n.t('confirm.block_domain.confirm'),
+      cancel: i18n.t('confirm.block_domain.cancel'),
+    }) !== 'confirm')
+      return
+
+    if (dataGlean) {
+      engagement.record({
+        ui_identifier: dataGlean,
+        mastodon_account_id: account.id,
+        mastodon_account_handle: account.acct,
+        ...engagementDetails[dataGlean],
+      })
+    }
+  }
 
   relationship!.domainBlocking = !relationship!.domainBlocking
   await client.v1.domainBlocks[relationship!.domainBlocking ? 'block' : 'unblock'](getServerName(account))
