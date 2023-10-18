@@ -34,6 +34,15 @@ async function fetchRelationships() {
     requested[i][1].value = relationships[i]
 }
 
+function recordEngagement(dataGlean: string, account: mastodon.v1.Account) {
+  engagement.record({
+    ui_identifier: dataGlean,
+    mastodon_account_id: account.id,
+    mastodon_account_handle: account.acct,
+    ...engagementDetails[dataGlean],
+  })
+}
+
 export async function toggleFollowAccount(relationship: mastodon.v1.Relationship, account: mastodon.v1.Account, dataGlean?: string) {
   const { client } = $(useMasto())
   const i18n = useNuxtApp().$i18n
@@ -49,14 +58,8 @@ export async function toggleFollowAccount(relationship: mastodon.v1.Relationship
     }) !== 'confirm')
       return
 
-    if (dataGlean) {
-      engagement.record({
-        ui_identifier: dataGlean,
-        mastodon_account_id: account.id,
-        mastodon_account_handle: account.acct,
-        ...engagementDetails[dataGlean],
-      })
-    }
+    if (dataGlean)
+      recordEngagement(dataGlean, account)
   }
 
   if (unfollow) {
@@ -85,24 +88,12 @@ export async function toggleMuteAccount(relationship: mastodon.v1.Relationship, 
     }) !== 'confirm')
       return
 
-    if (dataGlean) {
-      engagement.record({
-        ui_identifier: dataGlean,
-        mastodon_account_id: account.id,
-        mastodon_account_handle: account.acct,
-        ...engagementDetails[dataGlean],
-      })
-    }
+    if (dataGlean)
+      recordEngagement(dataGlean, account)
   }
   else {
-    if (dataGlean) {
-      engagement.record({
-        ui_identifier: dataGlean,
-        mastodon_account_id: account.id,
-        mastodon_account_handle: account.acct,
-        ...engagementDetails[dataGlean],
-      })
-    }
+    if (dataGlean)
+      recordEngagement(dataGlean, account)
   }
 
   relationship!.muting = !relationship!.muting
@@ -125,24 +116,12 @@ export async function toggleBlockAccount(relationship: mastodon.v1.Relationship,
     }) !== 'confirm')
       return
 
-    if (dataGlean) {
-      engagement.record({
-        ui_identifier: dataGlean,
-        mastodon_account_id: account.id,
-        mastodon_account_handle: account.acct,
-        ...engagementDetails[dataGlean],
-      })
-    }
+    if (dataGlean)
+      recordEngagement(dataGlean, account)
   }
   else {
-    if (dataGlean) {
-      engagement.record({
-        ui_identifier: dataGlean,
-        mastodon_account_id: account.id,
-        mastodon_account_handle: account.acct,
-        ...engagementDetails[dataGlean],
-      })
-    }
+    if (dataGlean)
+      recordEngagement(dataGlean, account)
   }
 
   relationship!.blocking = !relationship!.blocking
@@ -161,24 +140,12 @@ export async function toggleBlockDomain(relationship: mastodon.v1.Relationship, 
     }) !== 'confirm')
       return
 
-    if (dataGlean) {
-      engagement.record({
-        ui_identifier: dataGlean,
-        mastodon_account_id: account.id,
-        mastodon_account_handle: account.acct,
-        ...engagementDetails[dataGlean],
-      })
-    }
+    if (dataGlean)
+      recordEngagement(dataGlean, account)
   }
   else {
-    if (dataGlean) {
-      engagement.record({
-        ui_identifier: dataGlean,
-        mastodon_account_id: account.id,
-        mastodon_account_handle: account.acct,
-        ...engagementDetails[dataGlean],
-      })
-    }
+    if (dataGlean)
+      recordEngagement(dataGlean, account)
   }
 
   relationship!.domainBlocking = !relationship!.domainBlocking

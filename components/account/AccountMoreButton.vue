@@ -23,13 +23,17 @@ const { client } = $(useMasto())
 const useStarFavoriteIcon = usePreferences('useStarFavoriteIcon')
 const { share, isSupported: isShareSupported } = useShare()
 
-function shareAccount() {
+function recordEngagement(dataGlean) {
   engagement.record({
-    ui_identifier: 'profile.more.share_account',
+    ui_identifier: dataGlean,
     mastodon_account_id: account.id,
     mastodon_account_handle: account.acct,
-    ...engagementDetails['profile.more.share_account'],
+    ...engagementDetails[dataGlean],
   })
+}
+
+function shareAccount() {
+  recordEngagement('profile.more.share_account')
   share({ url: location.href })
 }
 
@@ -41,21 +45,10 @@ async function toggleReblogs() {
       cancel: t('confirm.show_reblogs.cancel'),
     }) !== 'confirm')
       return
-
-    engagement.record({
-      ui_identifier: 'profile.more.show_boosts',
-      mastodon_account_id: account.id,
-      mastodon_account_handle: account.acct,
-      ...engagementDetails['profile.more.show_boosts'],
-    })
+    recordEngagement('profile.more.show_boosts')
   }
   else {
-    engagement.record({
-      ui_identifier: 'profile.more.hide_boosts',
-      mastodon_account_id: account.id,
-      mastodon_account_handle: account.acct,
-      ...engagementDetails['profile.more.hide_boosts'],
-    })
+    recordEngagement('profile.more.hide_boosts')
   }
 
   const showingReblogs = !relationship?.showingReblogs
@@ -63,23 +56,12 @@ async function toggleReblogs() {
 }
 
 async function addUserNote() {
-  engagement.record({
-    ui_identifier: 'profile.more.add_note',
-    mastodon_account_id: account.id,
-    mastodon_account_handle: account.acct,
-    ...engagementDetails['profile.more.add_note'],
-  })
-
+  recordEngagement('profile.more.add_note')
   emit('addNote')
 }
 
 async function removeUserNote() {
-  engagement.record({
-    ui_identifier: 'profile.more.remove_note',
-    mastodon_account_id: account.id,
-    mastodon_account_handle: account.acct,
-    ...engagementDetails['profile.more.remove_note'],
-  })
+  recordEngagement('profile.more.remove_note')
 
   if (!relationship!.note || relationship!.note.length === 0)
     return
@@ -90,12 +72,7 @@ async function removeUserNote() {
 }
 
 function report() {
-  engagement.record({
-    ui_identifier: 'profile.more.report',
-    mastodon_account_id: account.id,
-    mastodon_account_handle: account.acct,
-    ...engagementDetails['profile.more.report'],
-  })
+  recordEngagement('profile.more.report')
   openReportDialog(account)
 }
 </script>
