@@ -110,7 +110,16 @@ const profileEvents = {
   'profile.details.followers': {
     engagement_type: 'general',
   },
-
+  // tabs
+  'profile.tabs.posts': {
+    engagement_type: 'general',
+  },
+  'profile.tabs.posts_and_replies': {
+    engagement_type: 'general',
+  },
+  'profile.tabs.media': {
+    engagement_type: 'general',
+  },
 }
 
 export const engagementDetails: EngagementDetails = {
