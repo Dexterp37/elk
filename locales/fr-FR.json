@@ -232,6 +232,7 @@
     "add_personal_note": "Ajouter une note personnelle à {0}",
     "block_account": "Bloquer {0}",
     "block_domain": "Bloquer le domaine {0}",
+    "copy_link": "Copier le lien",
     "copy_link_to_post": "Copier le lien du message",
     "copy_original_link_to_post": "Copiez le lien d'origine vers ce message",
     "delete": "Supprimer",

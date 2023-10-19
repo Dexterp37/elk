@@ -18,15 +18,14 @@ function checkIntersection([{ isIntersecting }]: [{ isIntersecting: boolean }]):
 }
 
 const clipboard = useClipboard()
-async function copyLink(url: string, event: Event): void {
-  event.preventDefault()
+async function copyLink(url: string): void {
   if (url)
     await clipboard.copy(url)
 }
 </script>
 
 <template>
-  <NuxtLink ref="target" :to="item.url" target="_blank" external p-y-16px p-x-8px flex border="b base">
+  <NuxtLink ref="target" :to="item.url" target="_blank" external mt-5 p-x-8px flex>
     <div class="content" w-full pr>
       <h4 text-sm text-secondary>
         {{ item.publisher }}
@@ -40,13 +39,26 @@ async function copyLink(url: string, event: Event): void {
     </div>
     <div class="media" relative overflow-hidden max-w-120px min-w-120px>
       <img :src="item.image.sizes?.[0]?.url" rounded-lg overflow-hidden w-full ha>
-      <div m-y-4px flex flex-justify-end>
-        <button p-12px text-xl @click="copyLink(item.url, $event)">
-          <div i-ri:share-line />
-        </button>
-      </div>
     </div>
   </NuxtLink>
+  <div flex flex-justify-end p-3 border="b base">
+    <CommonDropdown flex-none ms3 placement="bottom">
+      <button flex gap-1 items-center w-full rounded op75 text-xl hover="op100 text-purple" group aria-label="Share actions">
+        <div rounded-5 p2 elk-group-hover="bg-purple/10">
+          <div i-mi:share />
+        </div>
+      </button>
+      <template #popper>
+        <div flex="~ col">
+          <CommonDropdownItem
+            :text="$t('menu.copy_link')"
+            icon="i-ri:link"
+            @click="copyLink(item.url)"
+          />
+        </div>
+      </template>
+    </CommonDropdown>
+  </div>
 </template>
 
 <style scoped>
