@@ -83,10 +83,10 @@ export const profileEvents = {
     engagement_type: 'general',
   },
   // notifications
-  'profile.notify_start': {
+  'profile.notify.start': {
     engagement_type: 'general',
   },
-  'profile.notify_stop': {
+  'profile.notify.stop': {
     engagement_type: 'general',
   },
   // modify lists

@@ -52,7 +52,7 @@ function previewAvatar() {
 }
 
 async function toggleNotifications() {
-  const dataGlean = relationship?.notifying ? 'profile.notify_stop' : 'profile.notify_start'
+  const dataGlean = relationship?.notifying ? 'profile.notify.stop' : 'profile.notify.start'
   engagement.record({
     ui_identifier: dataGlean,
     mastodon_account_id: account.id,
