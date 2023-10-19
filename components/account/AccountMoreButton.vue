@@ -23,7 +23,7 @@ const { client } = $(useMasto())
 const useStarFavoriteIcon = usePreferences('useStarFavoriteIcon')
 const { share, isSupported: isShareSupported } = useShare()
 
-function recordEngagement(dataGlean) {
+function recordEngagement(dataGlean: string) {
   engagement.record({
     ui_identifier: dataGlean,
     mastodon_account_id: account.id,
