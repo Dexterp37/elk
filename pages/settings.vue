@@ -65,6 +65,13 @@ const isRootPath = computedEager(() => route.name === 'settings')
             />
             <SettingsItem
               command
+              icon="i-ri-lock-line"
+              :text="isHydrated ? $t('settings.privacy.label') : ''"
+              to="/settings/privacy"
+              :match="$route.path.startsWith('/settings/privacy/')"
+            />
+            <SettingsItem
+              command
               icon="i-ri:information-line"
               :text="isHydrated ? $t('settings.about.label') : ''"
               to="https://mozilla.social/about"
