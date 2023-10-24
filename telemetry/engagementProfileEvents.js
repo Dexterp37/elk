@@ -1,21 +1,21 @@
 export const profileEvents = {
   // follow button
-  'profile.follow.unblock': {
+  'profile.follow-btn.unblock': {
     engagement_type: 'general',
   },
-  'profile.follow.unmute': {
+  'profile.follow-btn.unmute': {
     engagement_type: 'general',
   },
-  'profile.follow.unfollow': {
+  'profile.follow-btn.unfollow': {
     engagement_type: 'general',
   },
-  'profile.follow.follow': {
+  'profile.follow-btn.follow': {
     engagement_type: 'general',
   },
-  'profile.follow.withdraw-follow-request': {
+  'profile.follow-btn.withdraw-follow-request': {
     engagement_type: 'general',
   },
-  'profile.follow.follow-request': {
+  'profile.follow-btn.follow-request': {
     engagement_type: 'general',
   },
   // more button and more options dropdown

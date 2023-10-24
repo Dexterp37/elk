@@ -75,17 +75,17 @@ const dataGlean = $computed(() => {
 
   let action
   if (relationship?.blocking)
-    action = 'follow.unblock'
+    action = 'follow-btn.unblock'
   else if (relationship?.muting)
-    action = 'follow.unmute'
+    action = 'follow-btn.unmute'
   else if (relationship ? relationship.following : context === 'following')
-    action = 'follow.unfollow'
+    action = 'follow-btn.unfollow'
   else if (relationship?.requested)
-    action = 'follow.withdraw-follow-request'
+    action = 'follow-btn.withdraw-follow-request'
   else if ((relationship ? relationship.followedBy : context === 'followedBy') && account.locked)
-    action = 'follow.follow-request'
+    action = 'follow-btn.follow-request'
   else
-    action = 'follow.follow'
+    action = 'follow-btn.follow'
 
   return `${gleanContext}.${action}`
 })
@@ -95,7 +95,7 @@ function handleClick() {
 
   // Unfollow actions require a 2nd layer of confirmation from the dialogue triggered by toggleFollowAccount,
   // so we skip sending engagement events here
-  // See 'follow.unfollow' and 'follow.withdraw-follow-request'
+  // See 'follow-btn.unfollow' and 'follow-btn.withdraw-follow-request'
   if (!unfollow) {
     engagement.record({
       ui_identifier: dataGlean,
