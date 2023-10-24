@@ -72,7 +72,7 @@ async function removeUserNote() {
 }
 
 function report() {
-  recordEngagement('profile.more.report')
+  recordEngagement('profile.more.report.open')
   openReportDialog(account)
 }
 </script>

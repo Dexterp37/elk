@@ -64,7 +64,7 @@ export const profileEvents = {
   'profile.more.unblock_domain': {
     engagement_type: 'general',
   },
-  'profile.more.report': {
+  'profile.more.report.open': {
     engagement_type: 'general',
   },
   'profile.more.goto_pinned': {
