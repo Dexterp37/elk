@@ -102,20 +102,21 @@ function handleClick() {
 
   const unfollow = relationship?.following || relationship?.requested
 
+  // Make sure recordEngagement is called before making changes to account/relationship
   if (relationship?.blocking) {
-    unblock()
     recordEngagement()
+    unblock()
   }
   else if (relationship?.muting) {
-    unmute()
     recordEngagement()
+    unmute()
   }
   else if (unfollow) {
     toggleFollowAccount(relationship!, account, dataGlean)
   }
   else {
-    toggleFollowAccount(relationship!, account)
     recordEngagement()
+    toggleFollowAccount(relationship!, account)
   }
 }
 </script>
