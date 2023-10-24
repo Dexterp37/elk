@@ -96,23 +96,23 @@ function handleClick() {
   // Unfollow actions require a 2nd layer of confirmation from the dialogue triggered by toggleFollowAccount,
   // so we skip sending engagement events here
   // See 'follow.unfollow' and 'follow.withdraw-follow-request'
-  if (unfollow)
-    return toggleFollowAccount(relationship!, account, dataGlean)
-
-  engagement.record({
-    ui_identifier: dataGlean,
-    mastodon_account_id: account.id,
-    mastodon_account_handle: account.acct,
-    ...engagementDetails[dataGlean],
-  })
+  if (!unfollow) {
+    engagement.record({
+      ui_identifier: dataGlean,
+      mastodon_account_id: account.id,
+      mastodon_account_handle: account.acct,
+      ...engagementDetails[dataGlean],
+    })
+  }
 
   if (relationship?.blocking)
-    return unblock()
-
-  if (relationship?.muting)
-    return unmute()
-
-  return toggleFollowAccount(relationship!, account)
+    unblock()
+  else if (relationship?.muting)
+    unmute()
+  else if (unfollow)
+    toggleFollowAccount(relationship!, account, dataGlean)
+  else
+    toggleFollowAccount(relationship!, account)
 }
 </script>
 
