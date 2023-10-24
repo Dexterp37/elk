@@ -544,6 +544,12 @@
       "zen_mode": "Zen mode",
       "zen_mode_description": "Hide asides unless the mouse cursor is over them. Also hide some elements from the timeline."
     },
+    "privacy": {
+      "data_collection": "Data collection and use",
+      "label": "Privacy",
+      "opt_out_description": "Allow technical, interaction, campaign and referral data to be sent to Mozilla. With this data you will have a personalized experience.",
+      "opt_out_title": "Help improve Mozilla Social"
+    },
     "profile": {
       "appearance": {
         "bio": "Bio",
