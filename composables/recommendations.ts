@@ -6,7 +6,7 @@ export interface Recommendation {
   /** Constant identifier for Recommendation type objects. */
   __typename: string
   /** Numerical identifier for the Recommendation. This is specifically a number for Fx client and Mozilla data pipeline compatibility. */
-  tileId: number
+  id: number
   /** The URL the Recommendation. */
   url: string
   /** The title of the Recommendation. */
