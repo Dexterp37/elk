@@ -9,7 +9,7 @@ const {
   item: Recommendation
 }>()
 
-function recordEngagement(gleanId) {
+function recordEngagement(gleanId: string) {
   engagement.record({
     ui_identifier: gleanId,
     recommendation_id: item.id,
