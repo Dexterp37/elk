@@ -29,7 +29,7 @@ function toggleOptOut() {
   <MainContent back-on-small-screen no-beta-label>
     <template #title>
       <div text-lg font-bold flex items-center gap-2 @click="$scrollToTop">
-        <span>{{ $t('settings.interface.label') }}</span>
+        <span>{{ $t('settings.privacy.label') }}</span>
       </div>
     </template>
     <div p6 flex="~ col gap6">
