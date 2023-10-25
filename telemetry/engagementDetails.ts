@@ -23,5 +23,17 @@ export const engagementDetails: EngagementDetails = {
   'discover.recommendation.share': {
     engagement_type: 'share',
   },
+  'header.signup': {
+    engagement_type: 'general',
+  },
+  'header.login': {
+    engagement_type: 'general',
+  },
+  'nav.signup': {
+    engagement_type: 'general',
+  },
+  'nav.login': {
+    engagement_type: 'general',
+  },
   ...profileEvents,
 }
