@@ -26,7 +26,7 @@ const tabs = $computed<CommonRouteTabOption[]>(() => [
     },
     display: t('tab.posts_with_replies'),
     icon: 'i-ri:chat-1-line',
-    dataGlean: 'profile.tabs.posts_and_replies',
+    dataGlean: 'profile.tabs.posts-and-replies',
   },
   {
     name: 'account-media',
