@@ -494,7 +494,7 @@ onDeactivated(() => {
               </span>
               <span v-if="draft.editingStatus">{{ $t('action.save_changes') }}</span>
               <span v-else-if="draft.params.inReplyToId">{{ $t('action.reply') }}</span>
-              <span v-else>{{ !isSending ? $t('action.publish') : $t('state.publishing') }}</span>
+              <span v-else>{{ !isSending ? $t('action.post') : $t('state.publishing') }}</span>
             </button>
           </CommonTooltip>
         </div>
@@ -504,6 +504,15 @@ onDeactivated(() => {
 </template>
 
 <style scoped>
+  .publish-button {
+    background: var(--c-primary);
+    border-radius: 360px;
+
+    &:hover {
+      background: var(--c-primary-active);
+    }
+  }
+
   .publish-button[aria-disabled=true] {
     cursor: not-allowed;
     background-color: var(--c-bg-btn-disabled);

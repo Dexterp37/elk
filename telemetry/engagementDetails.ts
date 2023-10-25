@@ -15,6 +15,12 @@ export const engagementDetails: EngagementDetails = {
   'settings.interface.themeColor': {
     engagement_type: 'general',
   },
+  'discover.recommendation.open': {
+    engagement_type: 'general',
+  },
+  'discover.recommendation.share': {
+    engagement_type: 'general',
+  },
   'header.signup': {
     engagement_type: 'general',
   },
