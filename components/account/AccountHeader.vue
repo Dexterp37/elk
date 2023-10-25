@@ -52,7 +52,7 @@ function previewAvatar() {
 }
 
 async function toggleNotifications() {
-  const dataGlean = relationship?.notifying ? 'profile.notify_stop' : 'profile.notify_start'
+  const dataGlean = relationship?.notifying ? 'profile.notify.stop' : 'profile.notify.start'
   engagement.record({
     ui_identifier: dataGlean,
     mastodon_account_id: account.id,
@@ -163,7 +163,7 @@ const personalNoteMaxLength = 2000
                     :aria-label="$t('list.modify_account')"
                     rounded-full text-sm p2 border-1 transition-colors
                     border-base hover:text-primary
-                    data-glean="profile.modify_lists"
+                    data-glean="profile.modify-lists"
                   >
                     <span i-ri:play-list-add-fill block text-current />
                   </button>

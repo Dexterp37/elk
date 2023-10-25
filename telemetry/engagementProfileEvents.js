@@ -22,28 +22,28 @@ export const profileEvents = {
   'profile.more.open': {
     engagement_type: 'general',
   },
-  'profile.more.open_in_original_site': {
+  'profile.more.open-in-original-site': {
     engagement_type: 'general',
   },
-  'profile.more.share_account': {
+  'profile.more.share-account': {
     engagement_type: 'general',
   },
   'profile.more.mention': {
     engagement_type: 'general',
   },
-  'profile.more.direct_message': {
+  'profile.more.direct-message': {
     engagement_type: 'general',
   },
-  'profile.more.show_boosts': {
+  'profile.more.show-boosts': {
     engagement_type: 'general',
   },
-  'profile.more.hide_boosts': {
+  'profile.more.hide-boosts': {
     engagement_type: 'general',
   },
-  'profile.more.add_note': {
+  'profile.more.add-note': {
     engagement_type: 'general',
   },
-  'profile.more.remove_note': {
+  'profile.more.remove-note': {
     engagement_type: 'general',
   },
   'profile.more.mute': {
@@ -58,39 +58,39 @@ export const profileEvents = {
   'profile.more.unblock': {
     engagement_type: 'general',
   },
-  'profile.more.block_domain': {
+  'profile.more.block-domain': {
     engagement_type: 'general',
   },
-  'profile.more.unblock_domain': {
+  'profile.more.unblock-domain': {
     engagement_type: 'general',
   },
   'profile.more.report.open': {
     engagement_type: 'general',
   },
-  'profile.more.goto_pinned': {
+  'profile.more.goto-pinned': {
     engagement_type: 'general',
   },
-  'profile.more.goto_favorites': {
+  'profile.more.goto-favorites': {
     engagement_type: 'general',
   },
-  'profile.more.goto_mutes': {
+  'profile.more.goto-mutes': {
     engagement_type: 'general',
   },
-  'profile.more.goto_blocks': {
+  'profile.more.goto-blocks': {
     engagement_type: 'general',
   },
-  'profile.more.goto_domain_blocks': {
+  'profile.more.goto-domain-blocks': {
     engagement_type: 'general',
   },
   // notifications
-  'profile.notify_start': {
+  'profile.notify.start': {
     engagement_type: 'general',
   },
-  'profile.notify_stop': {
+  'profile.notify.stop': {
     engagement_type: 'general',
   },
   // modify lists
-  'profile.modify_lists': {
+  'profile.modify-lists': {
     engagement_type: 'general',
   },
   // metrics details (# of posts, # of following, # of followers)
@@ -107,7 +107,7 @@ export const profileEvents = {
   'profile.tabs.posts': {
     engagement_type: 'general',
   },
-  'profile.tabs.posts_and_replies': {
+  'profile.tabs.posts-and-replies': {
     engagement_type: 'general',
   },
   'profile.tabs.media': {

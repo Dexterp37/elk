@@ -23,7 +23,7 @@ const { client } = $(useMasto())
 const useStarFavoriteIcon = usePreferences('useStarFavoriteIcon')
 const { share, isSupported: isShareSupported } = useShare()
 
-function recordEngagement(dataGlean) {
+function recordEngagement(dataGlean: string) {
   engagement.record({
     ui_identifier: dataGlean,
     mastodon_account_id: account.id,
@@ -33,7 +33,7 @@ function recordEngagement(dataGlean) {
 }
 
 function shareAccount() {
-  recordEngagement('profile.more.share_account')
+  recordEngagement('profile.more.share-account')
   share({ url: location.href })
 }
 
@@ -45,10 +45,10 @@ async function toggleReblogs() {
       cancel: t('confirm.show_reblogs.cancel'),
     }) !== 'confirm')
       return
-    recordEngagement('profile.more.show_boosts')
+    recordEngagement('profile.more.show-boosts')
   }
   else {
-    recordEngagement('profile.more.hide_boosts')
+    recordEngagement('profile.more.hide-boosts')
   }
 
   const showingReblogs = !relationship?.showingReblogs
@@ -56,12 +56,12 @@ async function toggleReblogs() {
 }
 
 async function addUserNote() {
-  recordEngagement('profile.more.add_note')
+  recordEngagement('profile.more.add-note')
   emit('addNote')
 }
 
 async function removeUserNote() {
-  recordEngagement('profile.more.remove_note')
+  recordEngagement('profile.more.remove-note')
 
   if (!relationship!.note || relationship!.note.length === 0)
     return
@@ -92,7 +92,7 @@ function report() {
           :text="$t('menu.open_in_original_site')"
           icon="i-ri:arrow-right-up-line"
           :command="command"
-          data-glean="profile.more.open_in_original_site"
+          data-glean="profile.more.open-in-original-site"
         />
       </NuxtLink>
       <CommonDropdownItem
@@ -118,7 +118,7 @@ function report() {
             :text="$t('menu.direct_message_account', [`@${account.acct}`])"
             icon="i-ri:message-3-line"
             :command="command"
-            @click="directMessageUser(account, 'profile.more.direct_message')"
+            @click="directMessageUser(account, 'profile.more.direct-message')"
           />
 
           <CommonDropdownItem
@@ -196,7 +196,7 @@ function report() {
               :text="$t('menu.block_domain', [getServerName(account)])"
               icon="i-ri:shut-down-line"
               :command="command"
-              @click="toggleBlockDomain(relationship!, account, 'profile.more.block_domain')"
+              @click="toggleBlockDomain(relationship!, account, 'profile.more.block-domain')"
             />
             <CommonDropdownItem
               is="button"
@@ -204,7 +204,7 @@ function report() {
               :text="$t('menu.unblock_domain', [getServerName(account)])"
               icon="i-ri:restart-line"
               :command="command"
-              @click="toggleBlockDomain(relationship!, account, 'profile.more.unblock_domain')"
+              @click="toggleBlockDomain(relationship!, account, 'profile.more.unblock-domain')"
             />
           </template>
 
@@ -219,19 +219,19 @@ function report() {
 
         <template v-else>
           <NuxtLink to="/pinned">
-            <CommonDropdownItem is="button" :text="$t('account.pinned')" icon="i-ri:pushpin-line" :command="command" data-glean="profile.more.goto_pinned" />
+            <CommonDropdownItem is="button" :text="$t('account.pinned')" icon="i-ri:pushpin-line" :command="command" data-glean="profile.more.goto-pinned" />
           </NuxtLink>
           <NuxtLink to="/favourites">
-            <CommonDropdownItem is="button" :text="$t('account.favourites')" :icon="useStarFavoriteIcon ? 'i-ri:star-line' : 'i-ri:heart-3-line'" :command="command" data-glean="profile.more.goto_favorites" />
+            <CommonDropdownItem is="button" :text="$t('account.favourites')" :icon="useStarFavoriteIcon ? 'i-ri:star-line' : 'i-ri:heart-3-line'" :command="command" data-glean="profile.more.goto-favorites" />
           </NuxtLink>
           <NuxtLink to="/mutes">
-            <CommonDropdownItem is="button" :text="$t('account.muted_users')" icon="i-ri:volume-mute-line" :command="command" data-glean="profile.more.goto_mutes" />
+            <CommonDropdownItem is="button" :text="$t('account.muted_users')" icon="i-ri:volume-mute-line" :command="command" data-glean="profile.more.goto-mutes" />
           </NuxtLink>
           <NuxtLink to="/blocks">
-            <CommonDropdownItem is="button" :text="$t('account.blocked_users')" icon="i-ri:forbid-2-line" :command="command" data-glean="profile.more.goto_blocks" />
+            <CommonDropdownItem is="button" :text="$t('account.blocked_users')" icon="i-ri:forbid-2-line" :command="command" data-glean="profile.more.goto-blocks" />
           </NuxtLink>
           <NuxtLink to="/domain_blocks">
-            <CommonDropdownItem is="button" :text="$t('account.blocked_domains')" icon="i-ri:shut-down-line" :command="command" data-glean="profile.more.goto_domain_blocks" />
+            <CommonDropdownItem is="button" :text="$t('account.blocked_domains')" icon="i-ri:shut-down-line" :command="command" data-glean="profile.more.goto-domain-blocks" />
           </NuxtLink>
         </template>
       </template>
