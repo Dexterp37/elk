@@ -7,16 +7,16 @@ export const profileEvents = {
     engagement_type: 'general',
   },
   'profile.follow-btn.unfollow': {
-    engagement_type: 'general',
+    engagement_type: 'follow',
   },
   'profile.follow-btn.follow': {
-    engagement_type: 'general',
+    engagement_type: 'follow',
   },
   'profile.follow-btn.withdraw-follow-request': {
-    engagement_type: 'general',
+    engagement_type: 'follow',
   },
   'profile.follow-btn.follow-request': {
-    engagement_type: 'general',
+    engagement_type: 'follow',
   },
   // more button and more options dropdown
   'profile.more.open': {
@@ -26,7 +26,7 @@ export const profileEvents = {
     engagement_type: 'general',
   },
   'profile.more.share-account': {
-    engagement_type: 'general',
+    engagement_type: 'share',
   },
   'profile.more.mention': {
     engagement_type: 'general',
