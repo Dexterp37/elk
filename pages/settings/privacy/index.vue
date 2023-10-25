@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import Glean from '@mozilla/glean/web'
+import type GleanType from '@mozilla/glean/web'
 import { mastodonAccountHandle, mastodonAccountId } from '~/telemetry/generated/identifiers'
 import { userAgent } from '~~/telemetry/generated/identifiers'
+
+let Glean: typeof GleanType
+if (typeof window !== 'undefined') {
+  const importedModule = await import('@mozilla/glean/web')
+  Glean = importedModule.default
+}
 
 const user = currentUser.value
 
@@ -13,14 +19,17 @@ useHydratedHead({
 const userSettings = useUserSettings()
 
 function toggleOptOut() {
-  const allowGlean = togglePreferences('allowGlean')
-  Glean.setUploadEnabled(allowGlean)
+  if (Glean) {
+    const allowGlean = togglePreferences('allowGlean')
 
-  // reset identifiers if user opts back in
-  if (user && allowGlean) {
-    mastodonAccountHandle.set(user.account.acct)
-    mastodonAccountId.set(user.account.id)
-    userAgent.set(navigator.userAgent)
+    Glean.setUploadEnabled(allowGlean)
+
+    // reset identifiers if user opts back in
+    if (user && allowGlean) {
+      mastodonAccountHandle.set(user.account.acct)
+      mastodonAccountId.set(user.account.id)
+      userAgent.set(navigator.userAgent)
+    }
   }
 }
 </script>
@@ -40,12 +49,14 @@ function toggleOptOut() {
         <h3 text-lg>
           {{ $t('settings.privacy.opt_out_title') }}
         </h3>
-        <SettingsToggleItem
-          :checked="getPreferences(userSettings, 'allowGlean')"
-          @click="toggleOptOut()"
-        >
-          {{ $t('settings.privacy.opt_out_description') }}
-        </SettingsToggleItem>
+        <client-only>
+          <SettingsToggleItem
+            :checked="getPreferences(userSettings, 'allowGlean')"
+            @click="toggleOptOut()"
+          >
+            {{ $t('settings.privacy.opt_out_description') }}
+          </SettingsToggleItem>
+        </client-only>
       </div>
     </div>
   </MainContent>
