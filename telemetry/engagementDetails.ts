@@ -1,3 +1,5 @@
+import { profileEvents } from './engagementProfileEvents'
+
 interface EngagementDetails {
   [propName: string]: {
     engagement_type: string
@@ -6,13 +8,13 @@ interface EngagementDetails {
 }
 
 export const engagementDetails: EngagementDetails = {
-  'settings.interface.colorMode': {
+  'settings.interface.color-mode': {
     engagement_type: 'general',
   },
-  'settings.interface.fontSize': {
+  'settings.interface.font-size': {
     engagement_type: 'general',
   },
-  'settings.interface.themeColor': {
+  'settings.interface.theme-color': {
     engagement_type: 'general',
   },
   'discover.recommendation.open': {
@@ -21,4 +23,5 @@ export const engagementDetails: EngagementDetails = {
   'discover.recommendation.share': {
     engagement_type: 'share',
   },
+  ...profileEvents,
 }
