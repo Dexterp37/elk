@@ -3,6 +3,8 @@ import type { ComputedRef, Ref } from 'vue'
 import { STORAGE_KEY_DRAFTS } from '~/constants'
 import type { Draft, DraftMap } from '~/types'
 import type { Mutable } from '~/types/utils'
+import { engagement } from '~~/telemetry/generated/ui'
+import { engagementDetails } from '~~/telemetry/engagementDetails'
 
 export const currentUserDrafts = (process.server || process.test)
   ? computed<DraftMap>(() => ({}))
@@ -158,13 +160,31 @@ export function useDraft(
   return { draft, isEmpty }
 }
 
-export function mentionUser(account: mastodon.v1.Account) {
+export function mentionUser(account: mastodon.v1.Account, dataGlean?: string) {
+  if (dataGlean) {
+    engagement.record({
+      ui_identifier: dataGlean,
+      mastodon_account_id: account.id,
+      mastodon_account_handle: account.acct,
+      ...engagementDetails[dataGlean],
+    })
+  }
+
   openPublishDialog('dialog', getDefaultDraft({
     status: `@${account.acct} `,
   }))
 }
 
-export function directMessageUser(account: mastodon.v1.Account) {
+export function directMessageUser(account: mastodon.v1.Account, dataGlean?: string) {
+  if (dataGlean) {
+    engagement.record({
+      ui_identifier: dataGlean,
+      mastodon_account_id: account.id,
+      mastodon_account_handle: account.acct,
+      ...engagementDetails[dataGlean],
+    })
+  }
+
   openPublishDialog('dialog', getDefaultDraft({
     status: `@${account.acct} `,
     visibility: 'direct',

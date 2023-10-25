@@ -16,6 +16,7 @@ const userSettings = useUserSettings()
       replace
       text-secondary
       exact-active-class="text-primary"
+      data-glean="profile.details.posts"
     >
       <template #default="{ isExactActive }">
         <CommonLocalizedNumber
@@ -31,6 +32,7 @@ const userSettings = useUserSettings()
       :to="getAccountFollowingRoute(account)"
       replace
       text-secondary exact-active-class="text-primary"
+      data-glean="profile.details.following"
     >
       <template #default="{ isExactActive }">
         <template
@@ -56,6 +58,7 @@ const userSettings = useUserSettings()
       :to="getAccountFollowersRoute(account)"
       replace text-secondary
       exact-active-class="text-primary"
+      data-glean="profile.details.followers"
     >
       <template #default="{ isExactActive }">
         <template v-if="!getPreferences(userSettings, 'hideFollowerCount')">

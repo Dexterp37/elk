@@ -8,6 +8,7 @@ export type OldFontSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type ColorMode = 'light' | 'dark' | 'system'
 
 export interface PreferencesSettings {
+  allowGlean: boolean
   hideAltIndicatorOnPosts: boolean
   hideBoostCount: boolean
   hideReplyCount: boolean
@@ -60,6 +61,7 @@ export function getDefaultLanguage(languages: string[]) {
 }
 
 export const DEFAULT__PREFERENCES_SETTINGS: PreferencesSettings = {
+  allowGlean: true,
   hideAltIndicatorOnPosts: false,
   hideBoostCount: false,
   hideReplyCount: false,

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { mastodon } from 'masto'
+import { engagement } from '~~/telemetry/generated/ui'
+import { engagementDetails } from '~~/telemetry/engagementDetails'
 
 const { account } = defineProps<{
   account: mastodon.v1.Account
@@ -50,6 +52,14 @@ function previewAvatar() {
 }
 
 async function toggleNotifications() {
+  const dataGlean = relationship?.notifying ? 'profile.notify.stop' : 'profile.notify.start'
+  engagement.record({
+    ui_identifier: dataGlean,
+    mastodon_account_id: account.id,
+    mastodon_account_handle: account.acct,
+    ...engagementDetails[dataGlean],
+  })
+
   relationship!.notifying = !relationship?.notifying
   try {
     const newRel = await client.v1.accounts.follow(account.id, { notify: relationship?.notifying })
@@ -128,7 +138,7 @@ const personalNoteMaxLength = 2000
             >
               {{ $t('settings.profile.appearance.title') }}
             </NuxtLink>
-            <AccountFollowButton :account="account" :command="command" />
+            <AccountFollowButton :account="account" :command="command" glean-context="profile" />
             <span inset-ie-0 flex gap-2 items-center>
               <AccountMoreButton
                 :account="account" :command="command"
@@ -153,6 +163,7 @@ const personalNoteMaxLength = 2000
                     :aria-label="$t('list.modify_account')"
                     rounded-full text-sm p2 border-1 transition-colors
                     border-base hover:text-primary
+                    data-glean="profile.modify-lists"
                   >
                     <span i-ri:play-list-add-fill block text-current />
                   </button>
