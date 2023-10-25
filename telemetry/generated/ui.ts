@@ -7,8 +7,8 @@
 import EventMetricType from "@mozilla/glean/private/metrics/event";
 
 /**
- * Event triggered when a user taps/clicks on a UI element,  triggering a change
- * in app state.
+ * Event triggered when a user taps/clicks on a UI element, triggering a change in
+ * app state.
  *
  * Generated from `ui.engagement`.
  */

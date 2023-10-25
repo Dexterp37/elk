@@ -21,7 +21,7 @@ export const engagementDetails: EngagementDetails = {
     engagement_type: 'general',
   },
   'discover.recommendation.share': {
-    engagement_type: 'general',
+    engagement_type: 'share',
   },
   ...profileEvents,
 }
