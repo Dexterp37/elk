@@ -37,16 +37,20 @@ export default defineNuxtPlugin((nuxtApp) => {
       if (!element)
         return
 
+      if (!element.hasAttribute('data-glean'))
+        return
+
       const data = element.getAttribute('data-glean') || ''
-      if (element.hasAttribute('data-glean')) {
-        const value = element.getAttribute('data-glean-value') || ''
-        engagement.record({ ui_identifier: data, engagement_value: value, ...engagementDetails[data] })
-      }
+      const value = element.getAttribute('data-glean-value') || ''
+      engagement.record({ ui_identifier: data, engagement_value: value, ...engagementDetails[data] })
     }
 
     function handleButtonClick(ev: MouseEvent) {
       const eventTarget = ev?.target as Element
       const closestButton = eventTarget.closest('button')
+
+      if (!closestButton)
+        return
 
       if (closestButton?.hasAttribute('href'))
         linkClick.record({ target_url: closestButton.getAttribute('href') || '' })
@@ -57,10 +61,13 @@ export default defineNuxtPlugin((nuxtApp) => {
     function handleLinkClick(ev: MouseEvent) {
       const eventTarget = ev?.target as Element
       const closestLink = eventTarget.closest('a')
-      if (closestLink) {
-        linkClick.record({ target_url: closestLink.getAttribute('href') || '' })
-        recordEngagement(closestLink)
-      }
+
+      if (!closestLink)
+        return
+
+      linkClick.record({ target_url: closestLink.getAttribute('href') || '' })
+
+      recordEngagement(closestLink)
     }
 
     window.addEventListener('click', eventListener)
