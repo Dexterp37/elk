@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { Recommendation } from '../composables/recommendations'
+import { engagement, impression } from '~~/telemetry/generated/ui'
+import { engagementDetails } from '~~/telemetry/engagementDetails'
 
 const {
   item,
@@ -7,25 +9,42 @@ const {
   item: Recommendation
 }>()
 
+function recordEngagement(gleanId: string) {
+  engagement.record({
+    ui_identifier: gleanId,
+    recommendation_id: item.id,
+    ...engagementDetails[gleanId],
+  })
+}
+
+function recordImpression() {
+  impression.record({
+    ui_identifier: 'discover.recommendation.impression',
+    recommendation_id: item.id,
+  })
+}
+
 const target = ref<HTMLDivElement>()
 const { isActive } = useIntersectionObserver(target, checkIntersection, { threshold: 0.5 })
 
 function checkIntersection([{ isIntersecting }]: [{ isIntersecting: boolean }]): void {
   if (isIntersecting && isActive.value) {
-    // fire analytics event here: item.id || item.title || item.url
+    recordImpression()
     isActive.value = false
   }
 }
 
 const clipboard = useClipboard()
 async function copyLink(url: string): void {
-  if (url)
+  if (url) {
     await clipboard.copy(url)
+    recordEngagement('discover.recommendation.share')
+  }
 }
 </script>
 
 <template>
-  <NuxtLink ref="target" :to="item.url" target="_blank" external mt-5 p-x-8px flex>
+  <NuxtLink ref="target" :to="item.url" target="_blank" external mt-5 p-x-8px flex @click="recordEngagement('discover.recommendation.open')">
     <div class="content" w-full pr>
       <h4 text-sm text-secondary>
         {{ item.publisher }}

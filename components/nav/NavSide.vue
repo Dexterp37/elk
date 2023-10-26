@@ -29,7 +29,6 @@ const useStarFavoriteIcon = usePreferences('useStarFavoriteIcon')
     <NavSideItem :text="$t('nav.bookmarks')" to="/bookmarks" icon="i-ri:bookmark-line" user-only :command="command" />
 
     <div class="spacer" shrink hidden sm:block />
-    <NavSideItem :text="$t('action.compose')" to="/compose" icon="i-ri:quill-pen-line" user-only :command="command" />
 
     <div class="spacer" shrink hidden sm:block />
     <NavSideItem :text="$t('nav.local')" :to="isHydrated ? `/${currentServer}/public/local` : '/public/local'" icon="i-ri:group-2-line " :command="command" />
@@ -38,6 +37,9 @@ const useStarFavoriteIcon = usePreferences('useStarFavoriteIcon')
 
     <div class="spacer" shrink hidden sm:block />
     <NavSideItem :text="$t('nav.settings')" to="/settings" icon="i-ri:settings-3-line" :command="command" />
+
+    <div class="spacer" shrink hidden sm:block />
+    <NavSideItem lozenge :text="$t('action.compose')" to="/compose" icon="i-ri:add-fill" user-only :command="command" />
   </nav>
 </template>
 

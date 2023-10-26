@@ -29,6 +29,7 @@ const { busy, oauth, singleInstanceServer } = useSignIn()
         gap-x-1 items-center justify-center text-sm p-x-10px p-y-10px xl:hidden text-center font-600
         sm:mr-8px sm:btn-solid sm:btn-outline sm:b-rd-8px
         :disabled="busy"
+        data-glean="header.signup"
         @click="oauth('signup')"
       >
         {{ $t('action.create_account') }}
@@ -39,6 +40,7 @@ const { busy, oauth, singleInstanceServer } = useSignIn()
         gap-x-1 items-center justify-center text-sm font-600 p-x-11px p-y-11px xl:hidden
         sm:border-1 sm:border-primary sm:btn-outline sm:b-rd-8px
         :disabled="busy"
+        data-glean="header.login"
         @click="oauth()"
       >
         {{ $t('action.sign_in') }}

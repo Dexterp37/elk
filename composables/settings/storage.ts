@@ -43,5 +43,5 @@ export function getPreferences<T extends keyof PreferencesSettings>(userSettings
 
 export function togglePreferences(key: keyof PreferencesSettings) {
   const flag = usePreferences(key)
-  flag.value = !flag.value
+  return flag.value = !flag.value
 }

@@ -8,6 +8,7 @@ export interface CommonRouteTabOption {
   name?: string
   icon?: string
   hide?: boolean
+  dataGlean?: string
 }
 const { options, command, replace, preventScrollTop = false } = $defineProps<{
   options: CommonRouteTabOption[]
@@ -43,6 +44,7 @@ useCommands(() => command
         tabindex="1"
         hover:bg-active transition-100
         exact-active-class="children:(text-secondary !border-primary !op100 !text-base)"
+        :data-glean="option.dataGlean"
         @click="!preventScrollTop && $scrollToTop()"
       >
         <span ws-nowrap mxa sm:px2 sm:py3 xl:pb4 xl:pt5 py2 text-center border-b-3 text-secondary-light hover:text-secondary border-transparent>{{ option.display || '&nbsp;' }}</span>
