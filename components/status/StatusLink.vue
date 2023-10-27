@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { mastodon } from 'masto'
+import { engagement } from '~~/telemetry/generated/ui'
+import { engagementDetails } from '~~/telemetry/engagementDetails'
 
 const props = defineProps<{
   status: mastodon.v1.Status
@@ -16,6 +18,13 @@ function onclick(evt: MouseEvent | KeyboardEvent) {
   const text = window.getSelection()?.toString()
   if (!el && !text)
     go(evt)
+
+  const eventTarget = evt?.target as Element
+  const closestLink = eventTarget.closest('a')
+  if (closestLink) {
+    const ui_identifier = 'post.link.tap'
+    engagement.record({ ui_identifier, mastodon_status_id: props.status.id, ...engagementDetails[ui_identifier] })
+  }
 }
 
 function go(evt: MouseEvent | KeyboardEvent) {

@@ -1,3 +1,4 @@
+import { postEvents } from './engagementPostEvents'
 import { profileEvents } from './engagementProfileEvents'
 
 interface EngagementDetails {
@@ -35,5 +36,6 @@ export const engagementDetails: EngagementDetails = {
   'nav.login': {
     engagement_type: 'general',
   },
+  ...postEvents,
   ...profileEvents,
 }
