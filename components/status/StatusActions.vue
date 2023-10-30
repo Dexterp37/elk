@@ -51,6 +51,11 @@ function favourite() {
   recordEngagement('favorite')
   toggleFavourite()
 }
+
+function bookmark() {
+  recordEngagement('bookmark')
+  toggleBookmark()
+}
 </script>
 
 <template>
@@ -128,7 +133,7 @@ function favourite() {
         :active="!!status.bookmarked"
         :disabled="isLoading.bookmarked"
         :command="command"
-        @click="toggleBookmark()"
+        @click="bookmark"
       />
     </div>
   </div>
