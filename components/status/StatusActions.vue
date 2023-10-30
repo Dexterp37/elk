@@ -26,9 +26,13 @@ const {
   toggleReblog,
 } = $(useStatusActions(props))
 
-function reply() {
-  const analyticsId = thing ? `${thing}.post.reply` : 'post.reply'
+function recordEngagement(engagementAction: String) {
+  const analyticsId = thing ? `${thing}.post.${engagementAction}` : `post.${engagementAction}`
   engagement.record({ ui_identifier: analyticsId, ...engagementDetails[analyticsId] })
+}
+
+function reply() {
+  recordEngagement('reply')
 
   if (!checkLogin())
     return
@@ -39,9 +43,7 @@ function reply() {
 }
 
 function reblog() {
-  const analyticsId = thing ? `${thing}.post.reblog` : 'post.reblog'
-  engagement.record({ ui_identifier: analyticsId, ...engagementDetails[analyticsId] })
-
+  recordEngagement('reblog')
   toggleReblog()
 }
 </script>
