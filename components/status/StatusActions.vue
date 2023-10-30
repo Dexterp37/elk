@@ -46,6 +46,11 @@ function reblog() {
   recordEngagement('reblog')
   toggleReblog()
 }
+
+function favourite() {
+  recordEngagement('favorite')
+  toggleFavourite()
+}
 </script>
 
 <template>
@@ -101,7 +106,7 @@ function reblog() {
         :active="!!status.favourited"
         :disabled="isLoading.favourited"
         :command="command"
-        @click="toggleFavourite()"
+        @click="favourite"
       >
         <template v-if="status.favouritesCount && !getPreferences(userSettings, 'hideFavoriteCount')" #text>
           <CommonLocalizedNumber
