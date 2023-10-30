@@ -12,6 +12,7 @@ const useStarFavoriteIcon = usePreferences('useStarFavoriteIcon')
 
     <div class="spacer" shrink xl:hidden />
     <NavSideItem :text="$t('nav.home')" to="/home" icon="i-ri:home-5-line" user-only :command="command" />
+    <NavSideItem :text="$t('nav.discover')" to="/discover" icon="i-ri-compass-fill" :command="command" />
     <NavSideItem :text="$t('nav.notifications')" to="/notifications" icon="i-ri:notification-4-line" user-only :command="command">
       <template #icon>
         <div flex relative>
@@ -30,7 +31,6 @@ const useStarFavoriteIcon = usePreferences('useStarFavoriteIcon')
     <div class="spacer" shrink hidden sm:block />
 
     <div class="spacer" shrink hidden sm:block />
-    <NavSideItem :text="$t('nav.explore')" :to="isHydrated ? `/${currentServer}/explore` : '/explore'" icon="i-ri:hashtag" :command="command" />
     <NavSideItem :text="$t('nav.local')" :to="isHydrated ? `/${currentServer}/public/local` : '/public/local'" icon="i-ri:group-2-line " :command="command" />
     <NavSideItem :text="$t('nav.federated')" :to="isHydrated ? `/${currentServer}/public` : '/public'" icon="i-ri:earth-line" :command="command" />
     <NavSideItem :text="$t('nav.lists')" :to="isHydrated ? `/${currentServer}/lists` : '/lists'" icon="i-ri:list-check" user-only :command="command" />
