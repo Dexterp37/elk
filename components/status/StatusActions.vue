@@ -27,7 +27,7 @@ const {
 } = $(useStatusActions(props))
 
 function reply() {
-  const analyticsId = `${thing}.post.reply`
+  const analyticsId = thing ? `${thing}.post.reply` : 'post.reply'
   engagement.record({ ui_identifier: analyticsId, ...engagementDetails[analyticsId] })
 
   if (!checkLogin())
