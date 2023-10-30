@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import type { mastodon } from 'masto'
+import { engagement } from '~~/telemetry/generated/ui'
+import { engagementDetails } from '~~/telemetry/engagementDetails'
 
 const props = defineProps<{
   status: mastodon.v1.Status
+  thing?: string
   details?: boolean
   command?: boolean
 }>()
 
 const focusEditor = inject<typeof noop>('focus-editor', noop)
 
-const { details, command } = $(props)
+const { details, command, thing } = $(props)
 
 const userSettings = useUserSettings()
 const useStarFavoriteIcon = usePreferences('useStarFavoriteIcon')
@@ -24,6 +27,9 @@ const {
 } = $(useStatusActions(props))
 
 function reply() {
+  const analyticsId = `${thing}.post.reply`
+  engagement.record({ ui_identifier: analyticsId, ...engagementDetails[analyticsId] })
+
   if (!checkLogin())
     return
   if (details)
