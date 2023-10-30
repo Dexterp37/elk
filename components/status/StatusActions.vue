@@ -37,6 +37,13 @@ function reply() {
   else
     navigateToStatus({ status, focusReply: true })
 }
+
+function reblog() {
+  const analyticsId = thing ? `${thing}.post.reblog` : 'post.reblog'
+  engagement.record({ ui_identifier: analyticsId, ...engagementDetails[analyticsId] })
+
+  toggleReblog()
+}
 </script>
 
 <template>
@@ -69,7 +76,7 @@ function reply() {
         :active="!!status.reblogged"
         :disabled="isLoading.reblogged || !canReblog"
         :command="command"
-        @click="toggleReblog()"
+        @click="reblog"
       >
         <template v-if="status.reblogsCount && !getPreferences(userSettings, 'hideBoostCount')" #text>
           <CommonLocalizedNumber
