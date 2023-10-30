@@ -12,6 +12,9 @@ export const postEvents = {
   'post.bookmark': {
     engagement_type: 'bookmark',
   },
+  'post.report': {
+    engagement_type: 'general',
+  },
   // Home feed
   'home.feed.post.reply': {
     engagement_type: 'reply',
@@ -24,5 +27,8 @@ export const postEvents = {
   },
   'home.feed.post.bookmark': {
     engagement_type: 'bookmark',
+  },
+  'home.feed.post.report': {
+    engagement_type: 'general',
   },
 }

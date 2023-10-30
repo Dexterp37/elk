@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import type { mastodon } from 'masto'
 import { toggleBlockAccount, toggleMuteAccount, useRelationship } from '~~/composables/masto/relationship'
+import { engagement } from '~~/telemetry/generated/ui'
+import { engagementDetails } from '~~/telemetry/engagementDetails'
 
 const props = defineProps<{
   status: mastodon.v1.Status
   details?: boolean
   command?: boolean
+  thing: string
 }>()
 
 const emit = defineEmits<{
   (event: 'afterEdit'): void
 }>()
 
-const { details, command } = $(props)
+const { details, command, thing } = $(props)
 
 const {
   status,
@@ -119,6 +122,13 @@ async function editStatus() {
 
 function showFavoritedAndBoostedBy() {
   openFavoridedBoostedByDialog(status.id)
+}
+
+function report() {
+  const analyticsId = thing ? `${thing}.post.report` : 'post.report'
+  engagement.record({ ui_identifier: analyticsId, mastodon_status_id: status.id, ...engagementDetails[analyticsId] })
+
+  openReportDialog(status.account, status)
 }
 </script>
 
@@ -317,7 +327,7 @@ function showFavoritedAndBoostedBy() {
               :text="$t('menu.report_account', [`@${status.account.acct}`])"
               icon="i-ri:flag-2-line"
               :command="command"
-              @click="openReportDialog(status.account, status)"
+              @click="report"
             />
           </template>
         </template>

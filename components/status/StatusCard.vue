@@ -172,7 +172,7 @@ const forceShow = ref(false)
                 </div>
               </div>
             </div>
-            <StatusActionsMore v-if="actions !== false" :status="status" me--2 />
+            <StatusActionsMore v-if="actions !== false" :status="status" me--2 :thing="thing" />
           </div>
 
           <!-- Content -->
