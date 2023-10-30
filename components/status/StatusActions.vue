@@ -28,7 +28,7 @@ const {
 
 function recordEngagement(engagementAction: String) {
   const analyticsId = thing ? `${thing}.post.${engagementAction}` : `post.${engagementAction}`
-  engagement.record({ ui_identifier: analyticsId, ...engagementDetails[analyticsId] })
+  engagement.record({ ui_identifier: analyticsId, mastodon_status_id: status.id, ...engagementDetails[analyticsId] })
 }
 
 function reply() {
