@@ -8,7 +8,7 @@ const props = defineProps<{
   status: mastodon.v1.Status
   details?: boolean
   command?: boolean
-  feedName: string
+  feedName?: string
 }>()
 
 const emit = defineEmits<{
