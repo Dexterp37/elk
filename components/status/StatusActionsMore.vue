@@ -8,14 +8,14 @@ const props = defineProps<{
   status: mastodon.v1.Status
   details?: boolean
   command?: boolean
-  thing: string
+  feedName: string
 }>()
 
 const emit = defineEmits<{
   (event: 'afterEdit'): void
 }>()
 
-const { details, command, thing } = $(props)
+const { details, command, feedName } = $(props)
 
 const {
   status,
@@ -125,7 +125,7 @@ function showFavoritedAndBoostedBy() {
 }
 
 function report() {
-  const analyticsId = thing ? `${thing}.post.report` : 'post.report'
+  const analyticsId = feedName ? `${feedName}.post.report` : 'post.report'
   engagement.record({ ui_identifier: analyticsId, mastodon_status_id: status.id, ...engagementDetails[analyticsId] })
 
   openReportDialog(status.account, status)

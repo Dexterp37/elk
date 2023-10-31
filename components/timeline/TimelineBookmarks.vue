@@ -3,5 +3,5 @@ const paginator = useMastoClient().v1.bookmarks.list()
 </script>
 
 <template>
-  <TimelinePaginator end-message="common.no_bookmarks" :paginator="paginator" thing="bookmarks.feed" />
+  <TimelinePaginator end-message="common.no_bookmarks" :paginator="paginator" feed-name="bookmarks.feed" />
 </template>

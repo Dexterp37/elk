@@ -13,7 +13,7 @@ const { paginator, stream, account, buffer = 10, endMessage = true } = definePro
   preprocess?: (items: mastodon.v1.Status[]) => mastodon.v1.Status[]
   buffer?: number
   endMessage?: boolean | string
-  thing: string
+  feedName: string
 }>()
 
 const commonPaginator = ref(null)
@@ -44,11 +44,11 @@ const showOriginSite = $computed(() =>
     <template #default="{ item, older, newer, active }">
       <template v-if="virtualScroller">
         <DynamicScrollerItem :item="item" :active="active" tag="article">
-          <StatusCard :status="item" :context="context" :older="older" :newer="newer" :thing="thing" />
+          <StatusCard :status="item" :context="context" :older="older" :newer="newer" :feed-name="feedName" />
         </DynamicScrollerItem>
       </template>
       <template v-else>
-        <StatusCard :status="item" :context="context" :older="older" :newer="newer" :thing="thing" />
+        <StatusCard :status="item" :context="context" :older="older" :newer="newer" :feed-name="feedName" />
       </template>
     </template>
     <template v-if="context === 'account' " #done="{ items }">

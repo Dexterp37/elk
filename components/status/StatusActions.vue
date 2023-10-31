@@ -5,14 +5,14 @@ import { engagementDetails } from '~~/telemetry/engagementDetails'
 
 const props = defineProps<{
   status: mastodon.v1.Status
-  thing?: string
+  feedName?: string
   details?: boolean
   command?: boolean
 }>()
 
 const focusEditor = inject<typeof noop>('focus-editor', noop)
 
-const { details, command, thing } = $(props)
+const { details, command, feedName } = $(props)
 
 const userSettings = useUserSettings()
 const useStarFavoriteIcon = usePreferences('useStarFavoriteIcon')
@@ -27,7 +27,7 @@ const {
 } = $(useStatusActions(props))
 
 function recordEngagement(engagementAction: String) {
-  const analyticsId = thing ? `${thing}.post.${engagementAction}` : `post.${engagementAction}`
+  const analyticsId = feedName ? `${feedName}.post.${engagementAction}` : `post.${engagementAction}`
   engagement.record({ ui_identifier: analyticsId, mastodon_status_id: status.id, ...engagementDetails[analyticsId] })
 }
 
