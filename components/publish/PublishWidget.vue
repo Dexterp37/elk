@@ -2,6 +2,8 @@
 import { EditorContent } from '@tiptap/vue-3'
 import stringLength from 'string-length'
 import type { mastodon } from 'masto'
+import { engagement } from '~~/telemetry/generated/ui'
+import { engagementDetails } from '~~/telemetry/engagementDetails'
 import type { Draft } from '~/types'
 
 const {
@@ -10,6 +12,7 @@ const {
   expanded = false,
   placeholder,
   dialogLabelledBy,
+  feedName,
 } = defineProps<{
   draftKey?: string
   initial?: () => Draft
@@ -18,6 +21,7 @@ const {
   inReplyToVisibility?: mastodon.v1.StatusVisibility
   expanded?: boolean
   dialogLabelledBy?: string
+  feedName?: string
 }>()
 
 const emit = defineEmits<{
@@ -171,8 +175,15 @@ async function toggleSensitive() {
 
 async function publish() {
   const status = await publishDraft()
-  if (status)
+  if (status) {
+    const analyticsId = feedName ? `${feedName}.post.create` : 'post.create'
+    engagement.record({
+      ui_identifier: analyticsId,
+      mastodon_status_id: status.id,
+      ...engagementDetails[analyticsId],
+    })
     emit('published', status)
+  }
 }
 
 useWebShareTarget(async ({ data: { data, action } }: any) => {

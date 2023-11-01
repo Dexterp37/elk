@@ -64,7 +64,7 @@ onDeactivated(() => {
       </VDropdown>
     </div>
     <div>
-      <PublishWidget :key="draftKey" expanded class="min-h-100!" :draft-key="draftKey" @published="onPublish" />
+      <PublishWidget :key="draftKey" expanded class="min-h-100!" :draft-key="draftKey" feed-name="" @published="onPublish" />
     </div>
   </div>
 </template>
