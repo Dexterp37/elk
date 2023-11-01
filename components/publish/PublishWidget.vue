@@ -174,9 +174,14 @@ async function toggleSensitive() {
 }
 
 async function publish() {
+  const isEditing = draft.editingStatus // need to save this before publishDraft
   const status = await publishDraft()
   if (status) {
-    const analyticsId = feedName ? `${feedName}.post.create` : 'post.create'
+    const analyticsId = isEditing
+      ? 'post.edit'
+      : draft.params.inReplyToId
+        ? 'post.reply'
+        : feedName ? `${feedName}.post.create` : 'post.create'
     engagement.record({
       ui_identifier: analyticsId,
       mastodon_status_id: status.id,
