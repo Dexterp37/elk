@@ -1,6 +1,6 @@
 export const postEvents = {
   // Standalone post
-  'post.reply': {
+  'post.open-reply': {
     engagement_type: 'reply',
   },
   'post.reblog': {
@@ -16,7 +16,7 @@ export const postEvents = {
     engagement_type: 'general',
   },
   // Home feed
-  'home.feed.post.reply': {
+  'home.feed.post.open-reply': {
     engagement_type: 'reply',
   },
   'home.feed.post.reblog': {
@@ -32,7 +32,7 @@ export const postEvents = {
     engagement_type: 'general',
   },
   // Favorites feed
-  'favorites.feed.post.reply': {
+  'favorites.feed.post.open-reply': {
     engagement_type: 'reply',
   },
   'favorites.feed.post.reblog': {
@@ -48,7 +48,7 @@ export const postEvents = {
     engagement_type: 'general',
   },
   // Bookmarks feed
-  'bookmarks.feed.post.reply': {
+  'bookmarks.feed.post.open-reply': {
     engagement_type: 'reply',
   },
   'bookmarks.feed.post.reblog': {
@@ -64,7 +64,7 @@ export const postEvents = {
     engagement_type: 'general',
   },
   // Local feed
-  'local.feed.post.reply': {
+  'local.feed.post.open-reply': {
     engagement_type: 'reply',
   },
   'local.feed.post.reblog': {
@@ -80,7 +80,7 @@ export const postEvents = {
     engagement_type: 'general',
   },
   // Federated feed
-  'federated.feed.post.reply': {
+  'federated.feed.post.open-reply': {
     engagement_type: 'reply',
   },
   'federated.feed.post.reblog': {
