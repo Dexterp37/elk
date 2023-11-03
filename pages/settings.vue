@@ -76,7 +76,7 @@ const devMode = useAppConfig().env === ('dev' || 'canary' || 'preview')
               command
               icon="i-ri:information-line"
               :text="isHydrated ? $t('settings.about.label') : ''"
-              to="https://mozilla.social/about"
+              to="/about"
             />
           </div>
         </MainContent>
