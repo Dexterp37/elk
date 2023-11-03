@@ -1,12 +1,12 @@
 <script setup lang="js">
-const content = (await $fetch(`/api/${publicServer.value}/extended_description`)).content
+const content = (await $fetch(`https://${publicServer.value}/api/v1/instance/extended_description`)).content
 const instance = await useMastoClient().v2.instance.fetch()
 
 const { t } = useI18n()
 
 const subtitle = t('about.subtitle')
 const administered_by = t('about.administered_by')
-const contact = t('about.contact', [instance.contact.email])
+const contact = t('about.contact', [`<a href="mailto:${instance.contact.email}">${instance.contact.email}</a>`])
 const server_rules = t('about.server_rules')
 const footer_about = t('about.footer_about')
 const footer_profiles_directory = t('about.footer_privacy_notice')
@@ -34,9 +34,7 @@ const footer_view_code = t('about.footer_view_code', [instance.version])
 
       <AccountCard :account="instance.contact.account" />
 
-      <div p-t-2>
-        {{ contact }}
-      </div>
+      <div p-t-2 class="content-rich" v-html="contact" />
     </div>
 
     <div m-b-5 b-t-1px p-t-5 class="content-rich" v-html="content" />
