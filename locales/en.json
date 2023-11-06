@@ -6,6 +6,19 @@
     "locale_changing": "Changing language, please wait",
     "route_loaded": "Page {0} loaded"
   },
+  "about": {
+    "administered_by": "Administered by",
+    "contact": "Contact: {0}",
+    "footer_about": "About",
+    "footer_content_policy": "Content Policies",
+    "footer_copyright_policies": "Copyright Policies",
+    "footer_privacy_notice": "Privacy Notice",
+    "footer_profiles_directory": "Profiles Directory",
+    "footer_terms_of_service": "Terms of Service",
+    "footer_view_code": "View Mastodon Source Code {0}",
+    "server_rules": "Server/Community Rules",
+    "subtitle": "Decentralized social media powered by Mastodon"
+  },
   "account": {
     "avatar_description": "{0}'s avatar",
     "blocked_by": "You're blocked by this user.",

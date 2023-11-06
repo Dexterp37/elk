@@ -30,6 +30,9 @@ jobs:
       - name: 🧪 Test project
         run: pnpm test tests/unit
 
+      - name: 🔎 Glean Lint
+        run: pnpm lint:glean
+
       - name: 📝 Lint
         run: pnpm lint
       # Mozilla.Social changes have errors with this check, disabling for now.
