@@ -1,5 +1,8 @@
 <script setup lang="js">
-const content = (await $fetch(`https://${publicServer.value}/api/v1/instance/extended_description`)).content
+const user = currentUser.value
+
+const content = (await $fetch(`https://${publicServer.value}/api/v1/instance/extended_description`,
+  { headers: { authorization: `Bearer ${user?.token}` } })).content
 const instance = await useMastoClient().v2.instance.fetch()
 
 const { t } = useI18n()
