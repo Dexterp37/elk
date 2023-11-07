@@ -37,7 +37,11 @@ const description = noInvites ? t('invites.no_codes.subtitle') : t('invites.subt
         <div flex justify-between items-center b-b-1px p-4 m-b--1px>
           <span>{{ code.token }}</span>
           <div>
-            <button flex justify-between items-center @click="copy(code.token)">
+            <NuxtLink v-if="code.assigned" underline flex :href="`/@${code.assigned}`">
+              @{{ code.assigned }}
+            </NuxtLink>
+
+            <button v-if="!code.assigned" flex justify-between items-center @click="copy(code.token)">
               <span v-if="copied && text === code.token" m-r-2 bg-primary text-base-light p-x-3 b-rd-10>{{ $t("invites.copied") }}</span>
               <div i-ri:file-copy-line />
             </button>
