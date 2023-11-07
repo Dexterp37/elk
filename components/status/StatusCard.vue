@@ -9,7 +9,7 @@ const props = withDefaults(
     hover?: boolean
     inNotification?: boolean
     isPreview?: boolean
-    feedName: string
+    feedName?: string
 
     // If we know the prev and next status in the timeline, we can simplify the card
     older?: mastodon.v1.Status
