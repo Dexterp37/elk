@@ -111,4 +111,8 @@ export const postEvents = {
   'federated.feed.post.report': {
     engagement_type: 'general',
   },
+  // Other
+  'post.link.tap': {
+    engagement_type: 'general',
+  },
 }
