@@ -6,11 +6,20 @@ export const postEvents = {
   'post.reblog': {
     engagement_type: 'boost',
   },
-  'post.favorite': {
-    engagement_type: 'favorite',
+  'post.unreblog': {
+    engagement_type: 'general',
+  },
+  'post.favourite': {
+    engagement_type: 'favourite',
+  },
+  'post.unfavourite': {
+    engagement_type: 'general',
   },
   'post.bookmark': {
     engagement_type: 'bookmark',
+  },
+  'post.unbookmark': {
+    engagement_type: 'general',
   },
   'post.report': {
     engagement_type: 'general',
@@ -22,11 +31,20 @@ export const postEvents = {
   'account.feed.post.reblog': {
     engagement_type: 'boost',
   },
-  'account.feed.post.favorite': {
-    engagement_type: 'favorite',
+  'account.feed.post.unreblog': {
+    engagement_type: 'general',
+  },
+  'account.feed.post.favourite': {
+    engagement_type: 'favourite',
+  },
+  'account.feed.post.unfavourite': {
+    engagement_type: 'general',
   },
   'account.feed.post.bookmark': {
     engagement_type: 'bookmark',
+  },
+  'account.feed.post.unbookmark': {
+    engagement_type: 'general',
   },
   'account.feed.post.report': {
     engagement_type: 'general',
@@ -38,11 +56,20 @@ export const postEvents = {
   'home.feed.post.reblog': {
     engagement_type: 'boost',
   },
-  'home.feed.post.favorite': {
-    engagement_type: 'favorite',
+  'home.feed.post.unreblog': {
+    engagement_type: 'general',
+  },
+  'home.feed.post.favourite': {
+    engagement_type: 'favourite',
+  },
+  'home.feed.post.unfavourite': {
+    engagement_type: 'general',
   },
   'home.feed.post.bookmark': {
     engagement_type: 'bookmark',
+  },
+  'home.feed.post.unbookmark': {
+    engagement_type: 'general',
   },
   'home.feed.post.report': {
     engagement_type: 'general',
@@ -54,11 +81,20 @@ export const postEvents = {
   'favorites.feed.post.reblog': {
     engagement_type: 'boost',
   },
-  'favorites.feed.post.favorite': {
-    engagement_type: 'favorite',
+  'favorites.feed.post.unreblog': {
+    engagement_type: 'general',
+  },
+  'favorites.feed.post.favourite': {
+    engagement_type: 'favourite',
+  },
+  'favorites.feed.post.unfavourite': {
+    engagement_type: 'general',
   },
   'favorites.feed.post.bookmark': {
     engagement_type: 'bookmark',
+  },
+  'favorites.feed.post.unbookmark': {
+    engagement_type: 'general',
   },
   'favorites.feed.post.report': {
     engagement_type: 'general',
@@ -70,11 +106,20 @@ export const postEvents = {
   'bookmarks.feed.post.reblog': {
     engagement_type: 'boost',
   },
-  'bookmarks.feed.post.favorite': {
-    engagement_type: 'favorite',
+  'bookmarks.feed.post.unreblog': {
+    engagement_type: 'general',
+  },
+  'bookmarks.feed.post.favourite': {
+    engagement_type: 'favourite',
+  },
+  'bookmarks.feed.post.unfavourite': {
+    engagement_type: 'general',
   },
   'bookmarks.feed.post.bookmark': {
     engagement_type: 'bookmark',
+  },
+  'bookmarks.feed.post.unbookmark': {
+    engagement_type: 'general',
   },
   'bookmarks.feed.post.report': {
     engagement_type: 'general',
@@ -86,11 +131,20 @@ export const postEvents = {
   'local.feed.post.reblog': {
     engagement_type: 'boost',
   },
-  'local.feed.post.favorite': {
-    engagement_type: 'favorite',
+  'local.feed.post.unreblog': {
+    engagement_type: 'general',
+  },
+  'local.feed.post.favourite': {
+    engagement_type: 'favourite',
+  },
+  'local.feed.post.unfavourite': {
+    engagement_type: 'general',
   },
   'local.feed.post.bookmark': {
     engagement_type: 'bookmark',
+  },
+  'local.feed.post.unbookmark': {
+    engagement_type: 'general',
   },
   'local.feed.post.report': {
     engagement_type: 'general',
@@ -102,11 +156,20 @@ export const postEvents = {
   'federated.feed.post.reblog': {
     engagement_type: 'boost',
   },
-  'federated.feed.post.favorite': {
-    engagement_type: 'favorite',
+  'federated.feed.post.unreblog': {
+    engagement_type: 'general',
+  },
+  'federated.feed.post.favourite': {
+    engagement_type: 'favourite',
+  },
+  'federated.feed.post.unfavourite': {
+    engagement_type: 'general',
   },
   'federated.feed.post.bookmark': {
     engagement_type: 'bookmark',
+  },
+  'federated.feed.post.unbookmark': {
+    engagement_type: 'general',
   },
   'federated.feed.post.report': {
     engagement_type: 'general',

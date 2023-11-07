@@ -26,7 +26,7 @@ const {
   toggleReblog,
 } = $(useStatusActions(props))
 
-function recordEngagement(engagementAction: String) {
+function recordEngagement(engagementAction: string) {
   const analyticsId = feedName ? `${feedName}.post.${engagementAction}` : `post.${engagementAction}`
   engagement.record({ ui_identifier: analyticsId, mastodon_status_id: status.id, ...engagementDetails[analyticsId] })
 }
@@ -43,18 +43,18 @@ function reply() {
 }
 
 function reblog() {
-  recordEngagement('reblog')
   toggleReblog()
+  recordEngagement(status.reblogged ? 'reblog' : 'unreblog')
 }
 
 function favourite() {
-  recordEngagement('favorite')
   toggleFavourite()
+  recordEngagement(status.favourited ? 'favourite' : 'unfavourite')
 }
 
 function bookmark() {
-  recordEngagement('bookmark')
   toggleBookmark()
+  recordEngagement(status.bookmarked ? 'bookmark' : 'unbookmark')
 }
 </script>
 
