@@ -32,7 +32,7 @@ function recordEngagement(engagementAction: String) {
 }
 
 function reply() {
-  recordEngagement('reply')
+  recordEngagement('open-reply')
 
   if (!checkLogin())
     return
