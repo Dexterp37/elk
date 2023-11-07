@@ -13,7 +13,7 @@ const { paginator, stream, account, buffer = 10, endMessage = true } = definePro
   preprocess?: (items: mastodon.v1.Status[]) => mastodon.v1.Status[]
   buffer?: number
   endMessage?: boolean | string
-  feedName: string
+  feedName?: string
 }>()
 
 const commonPaginator = ref(null)
