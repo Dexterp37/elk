@@ -41,8 +41,8 @@ function toggleApply() {
       </div>
     </div>
     <div absolute right-2 bottom-2>
-      <button class="bg-black/75" text-white px2 py1 rounded-2 @click="isEditDialogOpen = true">
-        {{ $t('action.edit') }}
+      <button class="bg-black/75 plusalt" text-white px2 py1 rounded-2 @click="isEditDialogOpen = true">
+        {{ $t('action.altplus') }}
       </button>
     </div>
     <ModalDialog
@@ -51,26 +51,60 @@ function toggleApply() {
       py-6
       px-6 max-w-300
     >
+      <div flex flex-justify-end mb>
+        <button btn-text p-0 @click="isEditDialogOpen = false">
+          <div i-ri:close-line />
+        </button>
+      </div>
       <div flex flex-col-reverse gap-5 md:flex-row>
         <div flex flex-col gap-2 justify-between>
           <h1 id="edit-attachment" font-bold>
             {{ $t('attachment.edit_title') }}
           </h1>
+          <div hidden md:block>
+            <p mb-4>
+              {{ $t('attachment.alt-text-p-1') }}
+            </p>
+            <p mb-4>
+              {{ $t('attachment.alt-text-p-2') }}
+            </p>
+            <ul mb-4 list-disc list-inside>
+              <li>{{ $t('attachment.alt-point-1') }}</li>
+              <li>{{ $t('attachment.alt-point-2') }}</li>
+              <li>{{ $t('attachment.alt-point-3') }}</li>
+              <li>{{ $t('attachment.alt-point-4') }}</li>
+              <li>{{ $t('attachment.alt-point-5') }}</li>
+            </ul>
+          </div>
           <div flex flex-col gap-2>
-            <textarea v-model="description" p-3 h-50 bg-base rounded-2 border-strong border-1 md:w-100 />
+            <textarea v-model="description" p-3 h-50 bg-base rounded-2 border-strong border-1 w-full :placeholder="$t('attachment.add_image_description')" />
             <div flex flex-row-reverse>
               <PublishCharacterCounter :length="description.length" :max="maxDescriptionLength" />
             </div>
-            <button btn-outline :disabled="description.length > maxDescriptionLength" @click="toggleApply">
+            <button class="apply-btn" btn-solid rounded-3 text-sm w-full :disabled="description.length > maxDescriptionLength" @click="toggleApply">
               {{ $t('action.apply') }}
             </button>
           </div>
-          <button btn-outline @click="isEditDialogOpen = false">
-            {{ $t('action.close') }}
-          </button>
         </div>
         <StatusAttachment :attachment="attachment" w-full is-preview />
       </div>
     </ModalDialog>
   </div>
 </template>
+
+<style>
+  .plusalt {
+    align-items: center;
+    padding: 4px 16px;
+    background: rgba(21, 20, 26, 0.8);
+    border-radius: 360px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+  }
+
+  .apply-btn {
+    border-radius: 360px;
+  }
+</style>
