@@ -15,6 +15,22 @@ export const postEvents = {
   'post.report': {
     engagement_type: 'general',
   },
+  // Account feed
+  'account.feed.post.open-reply': {
+    engagement_type: 'reply',
+  },
+  'account.feed.post.reblog': {
+    engagement_type: 'boost',
+  },
+  'account.feed.post.favorite': {
+    engagement_type: 'favorite',
+  },
+  'account.feed.post.bookmark': {
+    engagement_type: 'bookmark',
+  },
+  'account.feed.post.report': {
+    engagement_type: 'general',
+  },
   // Home feed
   'home.feed.post.open-reply': {
     engagement_type: 'reply',
