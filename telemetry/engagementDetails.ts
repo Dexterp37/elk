@@ -1,6 +1,5 @@
 import { postEvents } from './engagementPostEvents'
 import { profileEvents } from './engagementProfileEvents'
-import { postEvents } from './engagementPostEvents'
 
 interface EngagementDetails {
   [propName: string]: {
@@ -39,5 +38,4 @@ export const engagementDetails: EngagementDetails = {
   },
   ...postEvents,
   ...profileEvents,
-  ...postEvents,
 }
