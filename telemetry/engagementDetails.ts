@@ -1,3 +1,4 @@
+import { postEvents } from './engagementPostEvents'
 import { profileEvents } from './engagementProfileEvents'
 
 interface EngagementDetails {
@@ -47,5 +48,6 @@ export const engagementDetails: EngagementDetails = {
   'post.reply': {
     engagement_type: 'post',
   },
+  ...postEvents,
   ...profileEvents,
 }
