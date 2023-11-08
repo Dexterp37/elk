@@ -18,6 +18,6 @@ function onPublish(status) {
 <template>
   <div>
     <PublishWidget draft-key="home" border="b base" feed-name="home" @published="onPublish" />
-    <TimelinePaginator ref="homePaginator" v-bind="{ paginator, stream }" :preprocess="reorderAndFilter" context="home" />
+    <TimelinePaginator ref="homePaginator" v-bind="{ paginator, stream }" :preprocess="reorderAndFilter" context="home" feed-name="home.feed" />
   </div>
 </template>

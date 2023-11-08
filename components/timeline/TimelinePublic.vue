@@ -10,6 +10,6 @@ function reorderAndFilter(items: mastodon.v1.Status[]) {
 
 <template>
   <div>
-    <TimelinePaginator v-bind="{ paginator, stream }" :preprocess="reorderAndFilter" context="public" />
+    <TimelinePaginator v-bind="{ paginator, stream }" :preprocess="reorderAndFilter" context="public" feed-name="federated.feed" />
   </div>
 </template>

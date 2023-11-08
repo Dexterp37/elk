@@ -5,6 +5,6 @@ const stream = useStreaming(client => client.v1.stream.streamCommunityTimeline()
 
 <template>
   <div>
-    <TimelinePaginator v-bind="{ paginator, stream }" context="public" />
+    <TimelinePaginator v-bind="{ paginator, stream }" context="public" feed-name="local.feed" />
   </div>
 </template>

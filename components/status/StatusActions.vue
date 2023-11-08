@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import type { mastodon } from 'masto'
+import { engagement } from '~~/telemetry/generated/ui'
+import { engagementDetails } from '~~/telemetry/engagementDetails'
 
 const props = defineProps<{
   status: mastodon.v1.Status
+  feedName?: string
   details?: boolean
   command?: boolean
 }>()
 
 const focusEditor = inject<typeof noop>('focus-editor', noop)
 
-const { details, command } = $(props)
+const { details, command, feedName } = $(props)
 
 const userSettings = useUserSettings()
 const useStarFavoriteIcon = usePreferences('useStarFavoriteIcon')
@@ -23,13 +26,35 @@ const {
   toggleReblog,
 } = $(useStatusActions(props))
 
+function recordEngagement(engagementAction: string) {
+  const analyticsId = feedName ? `${feedName}.post.${engagementAction}` : `post.${engagementAction}`
+  engagement.record({ ui_identifier: analyticsId, mastodon_status_id: status.id, ...engagementDetails[analyticsId] })
+}
+
 function reply() {
+  recordEngagement('open-reply')
+
   if (!checkLogin())
     return
   if (details)
     focusEditor()
   else
     navigateToStatus({ status, focusReply: true })
+}
+
+function reblog() {
+  toggleReblog()
+  recordEngagement(status.reblogged ? 'reblog' : 'unreblog')
+}
+
+function favourite() {
+  toggleFavourite()
+  recordEngagement(status.favourited ? 'favourite' : 'unfavourite')
+}
+
+function bookmark() {
+  toggleBookmark()
+  recordEngagement(status.bookmarked ? 'bookmark' : 'unbookmark')
 }
 </script>
 
@@ -63,7 +88,7 @@ function reply() {
         :active="!!status.reblogged"
         :disabled="isLoading.reblogged || !canReblog"
         :command="command"
-        @click="toggleReblog()"
+        @click="reblog"
       >
         <template v-if="status.reblogsCount && !getPreferences(userSettings, 'hideBoostCount')" #text>
           <CommonLocalizedNumber
@@ -86,7 +111,7 @@ function reply() {
         :active="!!status.favourited"
         :disabled="isLoading.favourited"
         :command="command"
-        @click="toggleFavourite()"
+        @click="favourite"
       >
         <template v-if="status.favouritesCount && !getPreferences(userSettings, 'hideFavoriteCount')" #text>
           <CommonLocalizedNumber
@@ -108,7 +133,7 @@ function reply() {
         :active="!!status.bookmarked"
         :disabled="isLoading.bookmarked"
         :command="command"
-        @click="toggleBookmark()"
+        @click="bookmark"
       />
     </div>
   </div>

@@ -9,6 +9,7 @@ const props = withDefaults(
     hover?: boolean
     inNotification?: boolean
     isPreview?: boolean
+    feedName?: string
 
     // If we know the prev and next status in the timeline, we can simplify the card
     older?: mastodon.v1.Status
@@ -171,7 +172,7 @@ const forceShow = ref(false)
                 </div>
               </div>
             </div>
-            <StatusActionsMore v-if="actions !== false" :status="status" me--2 />
+            <StatusActionsMore v-if="actions !== false" :status="status" me--2 :feed-name="feedName" />
           </div>
 
           <!-- Content -->
@@ -183,7 +184,7 @@ const forceShow = ref(false)
             :in-notification="inNotification"
             mb2 :class="{ 'mt-2 mb1': isDM }"
           />
-          <StatusActions v-if="actions !== false" v-show="!getPreferences(userSettings, 'zenMode')" :status="status" />
+          <StatusActions v-if="actions !== false" v-show="!getPreferences(userSettings, 'zenMode')" :status="status" :feed-name="feedName" />
         </div>
       </template>
     </div>
