@@ -17,7 +17,7 @@ const { notifications } = useNotifications()
         <div i-ri:home-5-line />
       </NuxtLink>
       <NuxtLink to="/discover" :aria-label="$t('nav.discover')" :active-class="moreMenuVisible ? '' : 'text-primary'" flex flex-row items-center place-content-center h-full flex-1 class="coarse-pointer:select-none" @click="$scrollToTop">
-        <div i-ri:compass-fill />
+        <div i-lucide:compass />
       </NuxtLink>
       <NuxtLink to="/search" :aria-label="$t('nav.search')" :active-class="moreMenuVisible ? '' : 'text-primary'" flex flex-row items-center place-content-center h-full flex-1 class="coarse-pointer:select-none" @click="$scrollToTop">
         <div i-ri:search-line />
