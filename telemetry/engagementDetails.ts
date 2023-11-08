@@ -36,6 +36,18 @@ export const engagementDetails: EngagementDetails = {
   'nav.login': {
     engagement_type: 'general',
   },
+  'home.post.create': {
+    engagement_type: 'post',
+  },
+  'post.create': {
+    engagement_type: 'post',
+  },
+  'post.edit': {
+    engagement_type: 'post',
+  },
+  'post.reply': {
+    engagement_type: 'post',
+  },
   ...postEvents,
   ...profileEvents,
 }
