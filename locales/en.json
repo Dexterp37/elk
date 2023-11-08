@@ -57,6 +57,7 @@
     "view_other_following": "Following from other instances may not be displayed."
   },
   "action": {
+    "altplus": "+ Alt",
     "apply": "Apply",
     "bookmark": "Bookmark",
     "bookmarked": "Bookmarked",
@@ -93,7 +94,15 @@
   "app_logo": "Mozilla Logo",
   "app_name": "Mozilla Social",
   "attachment": {
-    "edit_title": "Description",
+    "add_image_description": "Add image description",
+    "alt-point-1": "Capture important elements",
+    "alt-point-2": "Summarize text in images",
+    "alt-point-3": "Use regular sentence structure",
+    "alt-point-4": "Avoid redundant information",
+    "alt-point-5": "Focus on trends and key findings in complex visuals (like diagrams or maps)",
+    "alt-text-p-1": "Alt text provides image descriptions for people with vision impairments, low bandwidth connections, or those seeking extra context.",
+    "alt-text-p-2": "You can improve accessibility and understanding for everyone by writing clear, concise, and objective alt text.",
+    "edit_title": "Add alt text",
     "remove_label": "Remove attachment"
   },
   "command": {

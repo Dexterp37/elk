@@ -118,7 +118,7 @@ watch(shouldLoadAttachment, () => {
 </script>
 
 <template>
-  <div relative ma flex :gap="isAudio ? '2' : ''">
+  <div relative flex flex-items-start :gap="isAudio ? '2' : ''">
     <template v-if="type === 'video'">
       <button
         type="button"
@@ -207,7 +207,6 @@ watch(shouldLoadAttachment, () => {
         focus:outline-none
         focus:ring="2 primary inset"
         rounded-lg
-        h-full
         w-full
         aria-label="Open image preview dialog"
         relative
@@ -227,9 +226,8 @@ watch(shouldLoadAttachment, () => {
           }"
           :should-load-image="shouldLoadAttachment"
           rounded-lg
-          h-full
           w-full
-          object-cover
+          object-contain
           :draggable="shouldLoadAttachment"
           :class="!shouldLoadAttachment ? 'brightness-60 hover:brightness-70 transition-filter' : ''"
         />
@@ -284,5 +282,8 @@ watch(shouldLoadAttachment, () => {
   left: 50%;
   top: 50%;
   translate: -50% -50%;
+}
+.status-attachment-image {
+  border-radius: 16px;
 }
 </style>
