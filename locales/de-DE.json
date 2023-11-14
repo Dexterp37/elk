@@ -479,10 +479,10 @@
         "unsupported": "Ihr Browser unterstützt keine Push-Benachrichtigungen.",
         "warning": {
           "enable_close": "Schließen",
-          "enable_description": "Um Benachrichtigungen zu erhalten, wenn Elk nicht geöffnet ist, aktiviere Push-Benachrichtigungen. \nDu kannst genau steuern, welche Arten von Interaktionen Push-Benachrichtigungen generieren, indem du die Schaltfläche \"@:settings.notifications.show_btn{'\"'} oben aktivierest, sobald sie aktiviert ist.",
-          "enable_description_desktop": "Um Benachrichtigungen zu erhalten, wenn Elk nicht geöffnet ist, aktiviere Push-Benachrichtigungen. \nDu kannst unter „Einstellungen > Benachrichtigungen > Einstellungen für Push-Benachrichtigungen“ genau steuern, welche Arten von Interaktionen Push-Benachrichtigungen generieren, sobald diese aktiviert sind.",
+          "enable_description": "Um Benachrichtigungen zu erhalten, wenn Mozilla.social nicht geöffnet ist, aktiviere Push-Benachrichtigungen. \nDu kannst genau steuern, welche Arten von Interaktionen Push-Benachrichtigungen generieren, indem du die Schaltfläche \"@:settings.notifications.show_btn{'\"'} oben aktivierest, sobald sie aktiviert ist.",
+          "enable_description_desktop": "Um Benachrichtigungen zu erhalten, wenn Mozilla.social nicht geöffnet ist, aktiviere Push-Benachrichtigungen. \nDu kannst unter „Einstellungen > Benachrichtigungen > Einstellungen für Push-Benachrichtigungen“ genau steuern, welche Arten von Interaktionen Push-Benachrichtigungen generieren, sobald diese aktiviert sind.",
           "enable_description_mobile": "Du erreichst die Einstellungen auch über das Navigationsmenü „Einstellungen > Benachrichtigungen > Push-Benachrichtigungseinstellungen“.",
-          "enable_description_settings": "Um Benachrichtigungen zu erhalten, wenn Elk nicht geöffnet ist, aktiviere Push-Benachrichtigungen. \nDu kannst genau steuern, welche Arten von Interaktionen Push-Benachrichtigungen auf demselben Bildschirm generieren, sobald du sie aktivierst.",
+          "enable_description_settings": "Um Benachrichtigungen zu erhalten, wenn Mozilla.social nicht geöffnet ist, aktiviere Push-Benachrichtigungen. \nDu kannst genau steuern, welche Arten von Interaktionen Push-Benachrichtigungen auf demselben Bildschirm generieren, sobald du sie aktivierst.",
           "enable_desktop": "Aktiviere Push-Benachrichtigungen",
           "enable_title": "Verpasse nie wieder Benachrichtigungen",
           "re_auth": "Offenbar unterstützt dein Server keine Push-Benachrichtigungen. \nVersuche dich abzumelden und erneut anzumelden. Wenn diese Meldung weiterhin angezeigt wird, wende dich an dein Serveradministrator."
