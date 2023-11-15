@@ -1,12 +1,11 @@
 <script setup lang="ts">
-const { env } = useBuildInfo()
 const router = useRouter()
 const back = ref<any>('')
 
 const nuxtApp = useNuxtApp()
 
 function onClickLogo() {
-  nuxtApp.hooks.callHook('elk-logo:click')
+  nuxtApp.hooks.callHook('moz-logo:click')
 }
 
 onMounted(() => {
