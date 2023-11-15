@@ -76,8 +76,8 @@
     "vote": "Abstimmen"
   },
   "app_desc_short": "Ein flinker Mastodon Web-Client",
-  "app_logo": "Elk Logo",
-  "app_name": "Elk",
+  "app_logo": "Mozilla Logo",
+  "app_name": "Mozilla.social",
   "attachment": {
     "edit_title": "Beschreibung",
     "remove_label": "Anhang entfernen"

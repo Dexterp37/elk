@@ -287,7 +287,7 @@ declare global {
 
 declare module '#app' {
   interface RuntimeNuxtHooks {
-    'elk-logo:click': () => void
+    'moz-logo:click': () => void
   }
 }
 
