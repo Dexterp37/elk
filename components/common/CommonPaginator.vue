@@ -52,7 +52,7 @@ function percolateStatus(status) {
   addStatus(status)
 }
 
-nuxtApp.hook('elk-logo:click', () => {
+nuxtApp.hook('moz-logo:click', () => {
   update()
   nuxtApp.$scrollToTop()
 })
