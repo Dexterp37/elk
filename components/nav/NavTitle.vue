@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const { env } = useBuildInfo()
 const router = useRouter()
 const back = ref<any>('')
 
